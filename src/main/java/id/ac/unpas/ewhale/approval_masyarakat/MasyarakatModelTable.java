@@ -52,17 +52,17 @@ public class MasyarakatModelTable extends AbstractTableModel {
             // Jika col bernilai 0
             case 0:
                 // Set value dengan nama dari rowItem
-                value = rowItem.getNama();
+                value = rowItem.getNamaMasyarakat();
                 break;
             // Jika col bernilai 1
             case 1:
                 // Set value dengan noTelepon dari rowItem
-                value = rowItem.getNoTelepon();
+                value = rowItem.getNoTeleponMasyarakat();
                 break;
             // Jika col bernilai 2
             case 2:
                 // Set value dengan alamat dari rowItem
-                value = rowItem.getAlamat();
+                value = rowItem.getAlamatMasyarakat();
                 break;
         }
 
@@ -92,7 +92,7 @@ public class MasyarakatModelTable extends AbstractTableModel {
         // Looping untuk mencari index dari data yang ingin diubah
         for (Masyarakat b : data) {
             // Jika id dari data sama dengan id dari value
-            if (b.getId().equals(value.getId())) {
+            if (b.getIdMasyarakat().equals(value.getIdMasyarakat())) {
                 // Biodata tersebut menjadi value
                 b = value;
                 // Set List data ke-i dengan value
@@ -114,7 +114,7 @@ public class MasyarakatModelTable extends AbstractTableModel {
         // Looping untuk mencari index dari data yang ingin dihapus
         for (Masyarakat b : data) {
             // Jika id dari data sama dengan id dari value
-            if (b.getId().equals(value.getId())) {
+            if (b.getIdMasyarakat().equals(value.getIdMasyarakat())) {
                 // Hapus data dari List data
                 data.remove(i);
                 // Hentikan looping

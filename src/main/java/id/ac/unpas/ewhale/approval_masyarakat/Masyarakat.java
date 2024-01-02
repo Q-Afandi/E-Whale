@@ -9,56 +9,56 @@ package id.ac.unpas.ewhale.approval_masyarakat;
  * @author ACER
  */
 public class Masyarakat {
-    private String id; // Variable id untuk menyimpan nilai id
-    private String nama; // Variable nama untuk menyimpan nilai nama
-    private String noTelepon; // Variable noTelepon untuk menyimpan nilai noTelepon
-    private String alamat; // Variable jenisKelamin untuk menyimpan nilai jenisKelamin
+    private String idMasyarakat; // Variable id untuk menyimpan nilai id
+    private String namaMasyarakat; // Variable nama untuk menyimpan nilai nama
+    private String noTeleponMasyarakat; // Variable noTelepon untuk menyimpan nilai noTelepon
+    private String alamatMasyarakat; // Variable jenisKelamin untuk menyimpan nilai jenisKelamin
     
     // Set nilai dari id dengan parameter id
-    public void setId(String id) {
+    public void setIdMasyarakat(String id) {
         // Set this.id dengan parameter id
-        this.id = id;
+        this.idMasyarakat = id;
     }
     
     // Dapatkan nilai dari id
-    public String getId() {
+    public String getIdMasyarakat() {
         // Kembalikan nilai dari this.id
-        return this.id;
+        return this.idMasyarakat;
     } 
     
     // Set nilai dari nama dengan parameter nama
-    public void setNama(String nama) {
+    public void setNamaMasyarakat(String nama) {
         // Set this.nama dengan parameter nama
-        this.nama = nama;
+        this.namaMasyarakat = nama;
     }
     
     // Dapatkan nilai dari nama
-    public String getNama() {
+    public String getNamaMasyarakat() {
         // Kembalikan nilai dari this.nama
-        return this.nama;
+        return this.namaMasyarakat;
     } 
     
     // Set nilai dari noTelepon dengan parameter noTelepon
-    public void setNoTelepon(String noTelepon) {
+    public void setNoTeleponMasyarakat(String noTelepon) {
         // Set this.noTelepon dengan parameter noTelepon
-        this.noTelepon = noTelepon;
+        this.noTeleponMasyarakat = noTelepon;
     }
     
     // Dapatkan nilai dari noTelepon
-    public String getNoTelepon() {
+    public String getNoTeleponMasyarakat() {
         // Kembalikan nilai dari this.noTelepon
-        return this.noTelepon;
+        return this.noTeleponMasyarakat;
     }
         
     // Set nilai dari alamat dengan parameter alamat
-    public void setAlamat(String alamat) {
+    public void setAlamatMasyarakat(String alamat) {
         // Set this.alamat dengan parameter alamat
-        this.alamat = alamat;
+        this.alamatMasyarakat = alamat;
     }
     
     // Dapatkan nilai dari alamat
-    public String getAlamat() {
+    public String getAlamatMasyarakat() {
         // Kembalikan nilai dari this.alamat
-        return this.alamat;
+        return this.alamatMasyarakat;
     }
 }

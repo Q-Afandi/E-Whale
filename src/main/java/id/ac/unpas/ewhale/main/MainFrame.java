@@ -4,11 +4,16 @@
  */
 package id.ac.unpas.ewhale.main;
 
+import id.ac.unpas.ewhale.approval_masyarakat.MasyarakatFrame;
+import id.ac.unpas.ewhale.dao.MasyarakatDao;
+
 /**
  *
  * @author ACER
  */
 public class MainFrame extends javax.swing.JFrame {
+     private MasyarakatFrame masyarakatFrame;
+     private MasyarakatDao masyarakatDao;
 
     /**
      * Creates new form MainFrame
@@ -60,19 +65,20 @@ public class MainFrame extends javax.swing.JFrame {
 
         jPanel4.setBackground(new java.awt.Color(37, 43, 59));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\ACER\\OneDrive\\Documents\\NetBeansProjects\\E-Whale\\src\\main\\java\\id\\ac\\unpas\\ewhale\\main\\resources\\approval_masyarakat.png")); // NOI18N
         jPanel4.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 50, 38));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Approval Masyarakat");
+        jLabel3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jLabel3KeyPressed(evt);
+            }
+        });
         jPanel4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(62, 6, 141, 26));
 
         jPanel5.setBackground(new java.awt.Color(37, 43, 59));
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\ACER\\OneDrive\\Documents\\NetBeansProjects\\E-Whale\\src\\main\\java\\id\\ac\\unpas\\ewhale\\main\\resources\\approval-kurir.png")); // NOI18N
         jPanel5.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 50, 38));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -82,8 +88,6 @@ public class MainFrame extends javax.swing.JFrame {
 
         jPanel6.setBackground(new java.awt.Color(37, 43, 59));
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel6.setIcon(new javax.swing.ImageIcon("C:\\Users\\ACER\\OneDrive\\Documents\\NetBeansProjects\\E-Whale\\src\\main\\java\\id\\ac\\unpas\\ewhale\\main\\resources\\jenis-dan-kategori.png")); // NOI18N
         jPanel6.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 50, 38));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -93,8 +97,6 @@ public class MainFrame extends javax.swing.JFrame {
 
         jPanel7.setBackground(new java.awt.Color(37, 43, 59));
         jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel8.setIcon(new javax.swing.ImageIcon("C:\\Users\\ACER\\OneDrive\\Documents\\NetBeansProjects\\E-Whale\\src\\main\\java\\id\\ac\\unpas\\ewhale\\main\\resources\\drop-box.png")); // NOI18N
         jPanel7.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 50, 38));
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -104,8 +106,6 @@ public class MainFrame extends javax.swing.JFrame {
 
         jPanel8.setBackground(new java.awt.Color(37, 43, 59));
         jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel10.setIcon(new javax.swing.ImageIcon("C:\\Users\\ACER\\OneDrive\\Documents\\NetBeansProjects\\E-Whale\\src\\main\\java\\id\\ac\\unpas\\ewhale\\main\\resources\\konversi-poin.png")); // NOI18N
         jPanel8.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 50, 38));
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -195,8 +195,6 @@ public class MainFrame extends javax.swing.JFrame {
         );
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 73, 790, 552));
-
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\ACER\\OneDrive\\Documents\\NetBeansProjects\\E-Whale\\src\\main\\java\\id\\ac\\unpas\\ewhale\\main\\resources\\Tampilan Dashboard.png")); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 625));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -212,6 +210,14 @@ public class MainFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jLabel3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabel3KeyPressed
+        // TODO add your handling code here:
+        masyarakatDao = new MasyarakatDao();
+        // menampilkan frame jenis member dengan parameter jenisMemberDao
+        masyarakatFrame = new MasyarakatFrame(masyarakatDao);
+        masyarakatFrame.setVisible(true);
+    }//GEN-LAST:event_jLabel3KeyPressed
 
     /**
      * @param args the command line arguments
