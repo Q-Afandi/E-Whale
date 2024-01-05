@@ -26,7 +26,7 @@ public class MasyarakatDao {
         try (Connection connection = MySqlConnection.getInstance().getConnection()) {
             // Membuat PreparedStatement untuk memasukkan data ke database
             PreparedStatement statement = connection.prepareStatement(
-                    "Insert into masyarakat(id, nama, no_telepon, jenis_kelamin, alamat) values (?, ?, ?, ?, ?)");
+                    "Insert into masyarakat(idMasyarakat, namaMasyarakat, noTeleponMasyarakat, alamatMasyarakat) values (?, ?, ?, ?, ?)");
 
             // Set nilai dari parameter yang ada di query
             statement.setString(1, masyarakat.getIdMasyarakat()); // id
@@ -58,7 +58,7 @@ public class MasyarakatDao {
         try (Connection connection = MySqlConnection.getInstance().getConnection()) {
             // Membuat PreparedStatement untuk mengubah data di database
             PreparedStatement statement = connection.prepareStatement(
-                    "update masyarakat set nama = ?, no_telepon = ?, jenis_kelamin = ?, alamat = ? where id = ?");
+                    "update masyarakat set nama = ?, no_telepon = ?, alamat = ? where id = ?");
 
             // Set nilai dari parameter yang ada di query
             statement.setString(1, masyarakat.getNamaMasyarakat()); // nama
@@ -130,10 +130,10 @@ public class MasyarakatDao {
                     Masyarakat masyarakat = new Masyarakat();
 
                     // Set nilai dari object masyarakat
-                    masyarakat.setIdMasyarakat(resultSet.getString("id")); // id
-                    masyarakat.setNamaMasyarakat(resultSet.getString("nama")); // nama
-                    masyarakat.setNoTeleponMasyarakat(resultSet.getString("no_telepon")); // no_telepon
-                    masyarakat.setAlamatMasyarakat(resultSet.getString("alamat")); // alamat
+                    masyarakat.setIdMasyarakat(resultSet.getString("idMasyarakat")); // id
+                    masyarakat.setNamaMasyarakat(resultSet.getString("namaMasyarakat")); // nama
+                    masyarakat.setNoTeleponMasyarakat(resultSet.getString("noTeleponMasyarakat")); // no_telepon
+                    masyarakat.setAlamatMasyarakat(resultSet.getString("alamatMasyarakat")); // alamat
 
                     // Menambahkan masyarakat ke list
                     list.add(masyarakat);
@@ -168,10 +168,10 @@ public class MasyarakatDao {
                 // Looping untuk mengambil semua data dari database
                 while (resultSet.next()) {
                     // Set nilai dari object masyarakat
-                    masyarakat.setIdMasyarakat(resultSet.getString("id")); // id
-                    masyarakat.setNamaMasyarakat(resultSet.getString("nama")); // nama
-                    masyarakat.setNoTeleponMasyarakat(resultSet.getString("no_telepon")); // no_telepon
-                    masyarakat.setAlamatMasyarakat(resultSet.getString("alamat")); // alamat
+                    masyarakat.setIdMasyarakat(resultSet.getString("idMasyarakat")); // id
+                    masyarakat.setNamaMasyarakat(resultSet.getString("namaMasyarakat")); // nama
+                    masyarakat.setNoTeleponMasyarakat(resultSet.getString("noTeleponMasyarakat")); // no_telepon
+                    masyarakat.setAlamatMasyarakat(resultSet.getString("alamatMasyarakat")); // alamat
                 }
             } catch (SQLException e) {
                 // Print error jika terjadi error
