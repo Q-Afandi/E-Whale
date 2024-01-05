@@ -2,24 +2,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package id.ac.unpas.ewhale.main;
-
-import id.ac.unpas.ewhale.approval_masyarakat.MasyarakatFrame;
-import id.ac.unpas.ewhale.dao.MasyarakatDao;
+package id.ac.unpas.ewhale.approval_kurir;
 
 /**
  *
  * @author ACER
  */
-public class MainFrame extends javax.swing.JFrame {
-     private MasyarakatFrame masyarakatFrame;
-     private MasyarakatDao masyarakatDao;
-     
+public class KurirFrame extends javax.swing.JFrame {
 
     /**
-     * Creates new form MainFrame
+     * Creates new form KurirFrame
      */
-    public MainFrame() {
+    public KurirFrame() {
         initComponents();
     }
 
@@ -49,6 +43,10 @@ public class MainFrame extends javax.swing.JFrame {
         iconDropbox = new javax.swing.JLabel();
         dropboxButton = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
+        jPanel9 = new javax.swing.JPanel();
+        tambahmasyarakatButton = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -217,15 +215,60 @@ public class MainFrame extends javax.swing.JFrame {
 
         jPanel3.setOpaque(false);
 
+        jPanel9.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel9.setBorder(javax.swing.BorderFactory.createEtchedBorder(null, new java.awt.Color(204, 204, 204)));
+
+        tambahmasyarakatButton.setBackground(new java.awt.Color(51, 102, 0));
+        tambahmasyarakatButton.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        tambahmasyarakatButton.setForeground(new java.awt.Color(255, 255, 255));
+        tambahmasyarakatButton.setText("Tambah Data");
+        tambahmasyarakatButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tambahmasyarakatButtonActionPerformed(evt);
+            }
+        });
+
+        jTable1.setModel(modelTable);
+        jScrollPane1.setViewportView(jTable1);
+
+        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(jPanel9Layout);
+        jPanel9Layout.setHorizontalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 716, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(tambahmasyarakatButton)))
+                .addContainerGap(24, Short.MAX_VALUE))
+        );
+        jPanel9Layout.setVerticalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addContainerGap(69, Short.MAX_VALUE)
+                .addComponent(tambahmasyarakatButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20))
+        );
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 790, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(9, Short.MAX_VALUE)
+                .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(14, 14, 14))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 552, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18))
         );
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 73, 790, 552));
@@ -247,28 +290,34 @@ public class MainFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void dropboxButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dropboxButtonActionPerformed
+    private void masyarakatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_masyarakatButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_dropboxButtonActionPerformed
-
-    private void konversiButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_konversiButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_konversiButtonActionPerformed
-
-    private void jeniskatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jeniskatButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jeniskatButtonActionPerformed
+        kurirDao = new kurirDao();
+        kurirFrame = new kurirFrame(kurirDao);
+        kurirFrame.setVisible(true);
+    }//GEN-LAST:event_masyarakatButtonActionPerformed
 
     private void kurirButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kurirButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_kurirButtonActionPerformed
 
-    private void masyarakatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_masyarakatButtonActionPerformed
+    private void jeniskatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jeniskatButtonActionPerformed
         // TODO add your handling code here:
-        masyarakatDao = new MasyarakatDao();
-        masyarakatFrame = new MasyarakatFrame(masyarakatDao);
-        masyarakatFrame.setVisible(true);
-    }//GEN-LAST:event_masyarakatButtonActionPerformed
+    }//GEN-LAST:event_jeniskatButtonActionPerformed
+
+    private void konversiButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_konversiButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_konversiButtonActionPerformed
+
+    private void dropboxButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dropboxButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dropboxButtonActionPerformed
+
+    private void tambahmasyarakatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahmasyarakatButtonActionPerformed
+        // TODO add your handling code here:
+        tambahKurir = new TambahKurir();
+        tambahKurir.setVisible(true);
+    }//GEN-LAST:event_tambahmasyarakatButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -281,26 +330,26 @@ public class MainFrame extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Windows".equals(info.getName())) {
+                if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(KurirFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(KurirFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(KurirFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(KurirFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainFrame().setVisible(true);
+                new KurirFrame().setVisible(true);
             }
         });
     }
@@ -318,11 +367,15 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel9;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JTable jTable1;
     private javax.swing.JButton jeniskatButton;
     private javax.swing.JButton konversiButton;
     private javax.swing.JButton kurirButton;
     private javax.swing.JButton masyarakatButton;
+    private javax.swing.JButton tambahmasyarakatButton;
     // End of variables declaration//GEN-END:variables
 }
