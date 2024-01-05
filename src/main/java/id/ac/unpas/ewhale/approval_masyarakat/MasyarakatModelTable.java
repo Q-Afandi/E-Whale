@@ -12,7 +12,7 @@ import javax.swing.table.*;
  */
 public class MasyarakatModelTable extends AbstractTableModel {
         // Array columnNames untuk menyimpan nama-nama kolom
-    private String[] columnNames = {"No", "Nama", "No Telepon", "Alamat", "Action" };
+    private String[] columnNames = {"Nama", "No Telepon", "Alamat", "Action" };
     // Membuat List dengan nama data yang berisi Biodata untuk menyimpan data dari input
     private List<Masyarakat> data;
 
@@ -49,6 +49,7 @@ public class MasyarakatModelTable extends AbstractTableModel {
 
         // Switch case untuk menentukan nilai dari variable value
         switch (col) {
+ 
             // Jika col bernilai 0
             case 0:
                 // Set value dengan nama dari rowItem

@@ -26,13 +26,13 @@ public class MasyarakatDao {
         try (Connection connection = MySqlConnection.getInstance().getConnection()) {
             // Membuat PreparedStatement untuk memasukkan data ke database
             PreparedStatement statement = connection.prepareStatement(
-                    "Insert into masyarakat(idMasyarakat, namaMasyarakat, noTeleponMasyarakat, alamatMasyarakat) values (?, ?, ?, ?, ?)");
+                    "Insert into masyarakat(idMasyarakat, namaMasyarakat, noTeleponMasyarakat, alamatMasyarakat) values (?, ?, ?, ?)");
 
             // Set nilai dari parameter yang ada di query
             statement.setString(1, masyarakat.getIdMasyarakat()); // id
             statement.setString(2, masyarakat.getNamaMasyarakat()); // nama
             statement.setString(3, masyarakat.getNoTeleponMasyarakat()); // no_telepon
-            statement.setString(5, masyarakat.getAlamatMasyarakat()); // alamat
+            statement.setString(4, masyarakat.getAlamatMasyarakat()); // alamat
             
             // Eksekusi query
             result = statement.executeUpdate();
@@ -63,8 +63,8 @@ public class MasyarakatDao {
             // Set nilai dari parameter yang ada di query
             statement.setString(1, masyarakat.getNamaMasyarakat()); // nama
             statement.setString(2, masyarakat.getNoTeleponMasyarakat()); // no_telepon
-            statement.setString(4, masyarakat.getAlamatMasyarakat()); // alamat
-            statement.setString(5, masyarakat.getIdMasyarakat()); // id
+            statement.setString(3, masyarakat.getAlamatMasyarakat()); // alamat
+            statement.setString(4, masyarakat.getIdMasyarakat()); // id
 
             // Eksekusi query
             result = statement.executeUpdate();
