@@ -6,8 +6,10 @@ package id.ac.unpas.ewhale.main;
 
 import id.ac.unpas.ewhale.approval_kurir.KurirFrame;
 import id.ac.unpas.ewhale.approval_masyarakat.MasyarakatFrame;
+import id.ac.unpas.ewhale.dao.JenisKatDao;
 import id.ac.unpas.ewhale.dao.KurirDao;
 import id.ac.unpas.ewhale.dao.MasyarakatDao;
+import id.ac.unpas.ewhale.jenis_kategori.JenisKatFrame;
 
 /**
  *
@@ -18,6 +20,9 @@ public class MainFrame extends javax.swing.JFrame {
      private MasyarakatDao masyarakatDao;
      private KurirFrame kurirFrame;
      private KurirDao kurirDao;
+     private JenisKatFrame jenisKatFrame;
+     private JenisKatDao jenisKatDao;
+     
      
      
 
@@ -262,6 +267,9 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jeniskatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jeniskatButtonActionPerformed
         // TODO add your handling code here:
+        jenisKatDao = new JenisKatDao();
+        jenisKatFrame = new JenisKatFrame(jenisKatDao);
+        jenisKatFrame.setVisible(true);
     }//GEN-LAST:event_jeniskatButtonActionPerformed
 
     private void kurirButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kurirButtonActionPerformed
