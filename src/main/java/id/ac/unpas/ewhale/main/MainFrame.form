@@ -188,11 +188,6 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="iconMasyarakat">
-              <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\ACER\OneDrive\Documents\NetBeansProjects\E-Whale\src\main\java\id\ac\unpas\ewhale\main\resources\approval_masyarakat.png"/>
-                </Property>
-              </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="masyarakatButton">
               <Properties>
@@ -213,11 +208,6 @@
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="iconKurir">
-              <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\ACER\OneDrive\Documents\NetBeansProjects\E-Whale\src\main\java\id\ac\unpas\ewhale\main\resources\approval-kurir.png"/>
-                </Property>
-              </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="kurirButton">
               <Properties>
@@ -239,11 +229,6 @@
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="iconJeniskat">
-              <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\ACER\OneDrive\Documents\NetBeansProjects\E-Whale\src\main\java\id\ac\unpas\ewhale\main\resources\jenis-dan-kategori.png"/>
-                </Property>
-              </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="jeniskatButton">
               <Properties>
@@ -264,11 +249,6 @@
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="iconKonversi">
-              <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\ACER\OneDrive\Documents\NetBeansProjects\E-Whale\src\main\java\id\ac\unpas\ewhale\main\resources\konversi-poin.png"/>
-                </Property>
-              </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="konversiButton">
               <Properties>
@@ -289,11 +269,6 @@
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="iconDropbox">
-              <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\ACER\OneDrive\Documents\NetBeansProjects\E-Whale\src\main\java\id\ac\unpas\ewhale\main\resources\drop-box.png"/>
-                </Property>
-              </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="dropboxButton">
               <Properties>
@@ -339,11 +314,6 @@
           </Layout>
         </Container>
         <Component class="javax.swing.JLabel" name="jLabel1">
-          <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\ACER\OneDrive\Documents\NetBeansProjects\E-Whale\src\main\java\id\ac\unpas\ewhale\main\resources\Tampilan Dashboard.png"/>
-            </Property>
-          </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="0" y="0" width="1000" height="625"/>

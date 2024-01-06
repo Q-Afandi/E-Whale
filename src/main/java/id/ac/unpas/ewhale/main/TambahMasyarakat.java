@@ -26,6 +26,7 @@ public class TambahMasyarakat extends javax.swing.JFrame {
     public TambahMasyarakat() {
         this.masyarakatDao = new MasyarakatDao();
         initComponents();
+        this.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     }
 
     /**

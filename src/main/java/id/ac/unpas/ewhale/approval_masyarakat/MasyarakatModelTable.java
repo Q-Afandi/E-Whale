@@ -12,7 +12,7 @@ import javax.swing.table.*;
  */
 public class MasyarakatModelTable extends AbstractTableModel {
         // Array columnNames untuk menyimpan nama-nama kolom
-    private String[] columnNames = {"Nama", "No Telepon", "Alamat", "Action" };
+    private String[] columnNames = {"Nama", "No Telepon", "Alamat"};
     // Membuat List dengan nama data yang berisi Biodata untuk menyimpan data dari input
     private List<Masyarakat> data;
 
@@ -85,27 +85,27 @@ public class MasyarakatModelTable extends AbstractTableModel {
         fireTableRowsInserted(data.size() - 1, data.size() - 1);
     }
 
-    // Method untuk mengubah nilai di table
-    public void update(Masyarakat value) {
-        // Membuat variable i untuk menyimpan index dari data
-        int i = 0;
-
-        // Looping untuk mencari index dari data yang ingin diubah
-        for (Masyarakat b : data) {
-            // Jika id dari data sama dengan id dari value
-            if (b.getIdMasyarakat().equals(value.getIdMasyarakat())) {
-                // Biodata tersebut menjadi value
-                b = value;
-                // Set List data ke-i dengan value
-                data.set(i, value);
-                // Mengubah nilai di table
-                fireTableCellUpdated(data.size() - 1,
-                        data.size() - 1);
-            }
-            // Increment i
-            i++;
-        }
-    }
+//    // Method untuk mengubah nilai di table
+//    public void update(Masyarakat value) {
+//        // Membuat variable i untuk menyimpan index dari data
+//        int i = 0;
+//
+//        // Looping untuk mencari index dari data yang ingin diubah
+//        for (Masyarakat b : data) {
+//            // Jika id dari data sama dengan id dari value
+//            if (b.getIdMasyarakat().equals(value.getIdMasyarakat())) {
+//                // Biodata tersebut menjadi value
+//                b = value;
+//                // Set List data ke-i dengan value
+//                data.set(i, value);
+//                // Mengubah nilai di table
+//                fireTableCellUpdated(data.size() - 1,
+//                        data.size() - 1);
+//            }
+//            // Increment i
+//            i++;
+//        }
+//    }
 
     // Method untuk menghapus nilai di table
     public void delete(Masyarakat value) {
