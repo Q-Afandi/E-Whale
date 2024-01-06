@@ -53,38 +53,38 @@ public class KurirDao {
         return result;
     }
 
-    // Fungsi untuk mengubah data di database
-    public int update(Kurir masyarakat) {
-        // Variable result untuk menyimpan nilai dari eksekusi query apakah berhasil atau tidak
-        int result = -1;
-
-        // Try with resources untuk membuat koneksi ke database
-        try (Connection connection = MySqlConnection.getInstance().getConnection()) {
-            // Membuat PreparedStatement untuk mengubah data di database
-            PreparedStatement statement = connection.prepareStatement(
-                    "update masyarakat set nama = ?, no_telepon = ?, alamat = ? where id = ?");
-
-            // Set nilai dari parameter yang ada di query
-            statement.setString(1, masyarakat.getNamaKurir()); // nama
-            statement.setString(2, masyarakat.getNoTeleponKurir()); // no_telepon
-            statement.setString(3, masyarakat.getAlamatKurir()); // alamat
-            statement.setString(4, masyarakat.getIdKurir()); // id
-
-            // Eksekusi query
-            result = statement.executeUpdate();
-
-            // Print data yang diubah di database
-            System.out.println("Update data: " + masyarakat.getIdKurir() + " " + masyarakat.getNamaKurir() + " "
-                    + masyarakat.getNoTeleponKurir() + " " + masyarakat.getAlamatKurir());
-
-        } catch (SQLException e) {
-            // Print error jika terjadi error
-            e.printStackTrace();
-        }
-
-        // Kembalikan nilai result
-        return result;
-    }
+//    // Fungsi untuk mengubah data di database
+//    public int update(Kurir masyarakat) {
+//        // Variable result untuk menyimpan nilai dari eksekusi query apakah berhasil atau tidak
+//        int result = -1;
+//
+//        // Try with resources untuk membuat koneksi ke database
+//        try (Connection connection = MySqlConnection.getInstance().getConnection()) {
+//            // Membuat PreparedStatement untuk mengubah data di database
+//            PreparedStatement statement = connection.prepareStatement(
+//                    "update masyarakat set nama = ?, no_telepon = ?, alamat = ? where id = ?");
+//
+//            // Set nilai dari parameter yang ada di query
+//            statement.setString(1, masyarakat.getNamaKurir()); // nama
+//            statement.setString(2, masyarakat.getNoTeleponKurir()); // no_telepon
+//            statement.setString(3, masyarakat.getAlamatKurir()); // alamat
+//            statement.setString(4, masyarakat.getIdKurir()); // id
+//
+//            // Eksekusi query
+//            result = statement.executeUpdate();
+//
+//            // Print data yang diubah di database
+//            System.out.println("Update data: " + masyarakat.getIdKurir() + " " + masyarakat.getNamaKurir() + " "
+//                    + masyarakat.getNoTeleponKurir() + " " + masyarakat.getAlamatKurir());
+//
+//        } catch (SQLException e) {
+//            // Print error jika terjadi error
+//            e.printStackTrace();
+//        }
+//
+//        // Kembalikan nilai result
+//        return result;
+//    }
 
     // Fungsi untuk menghapus data di database
     public int delete(Kurir kurir) {
