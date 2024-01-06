@@ -6,15 +6,29 @@ package id.ac.unpas.ewhale.main;
 
 /**
  *
- * @author ACER
+ * @author Haykal
  */
+
+import id.ac.unpas.ewhale.konversi_poin.KonversiPoin;
+import id.ac.unpas.ewhale.konversi_poin.KonversiPoinFrame;
+import id.ac.unpas.ewhale.konversi_poin.KonversiPoinModelTable;
+import id.ac.unpas.ewhale.dao.KonversiPoinDao;
+import java.util.List;
+
 public class TambahKonversiPoin extends javax.swing.JFrame {
 
+    private KonversiPoinModelTable modelTable;
+    private KonversiPoinDao konversiPoinDao;
+    private KonversiPoinFrame konversiPoinFrame;
+    private List<KonversiPoin> konversipoinList;
+    
     /**
      * Creates new form TambahKonversiPoin
      */
     public TambahKonversiPoin() {
+      this.konversiPoinDao = new KonversiPoinDao();
         initComponents();
+        this.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     }
 
     /**
@@ -32,14 +46,14 @@ public class TambahKonversiPoin extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         kategoriTextField = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        submitJenisKatButton = new javax.swing.JButton();
-        kategoriTextField1 = new javax.swing.JTextField();
+        submitKonversiPoinButton = new javax.swing.JButton();
+        poinTextField = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setText("Tambah Data Jenis & Kategori Sampah");
+        jLabel1.setText("Tambah Data Konversi Sampah");
 
         jenisTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -57,19 +71,19 @@ public class TambahKonversiPoin extends javax.swing.JFrame {
 
         jLabel4.setText("Kategori");
 
-        submitJenisKatButton.setBackground(new java.awt.Color(0, 153, 0));
-        submitJenisKatButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        submitJenisKatButton.setForeground(new java.awt.Color(255, 255, 255));
-        submitJenisKatButton.setText("Submit");
-        submitJenisKatButton.addActionListener(new java.awt.event.ActionListener() {
+        submitKonversiPoinButton.setBackground(new java.awt.Color(0, 153, 0));
+        submitKonversiPoinButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        submitKonversiPoinButton.setForeground(new java.awt.Color(255, 255, 255));
+        submitKonversiPoinButton.setText("Submit");
+        submitKonversiPoinButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                submitJenisKatButtonActionPerformed(evt);
+                submitKonversiPoinButtonActionPerformed(evt);
             }
         });
 
-        kategoriTextField1.addActionListener(new java.awt.event.ActionListener() {
+        poinTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                kategoriTextField1ActionPerformed(evt);
+                poinTextFieldActionPerformed(evt);
             }
         });
 
@@ -84,7 +98,7 @@ public class TambahKonversiPoin extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap(142, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(submitJenisKatButton, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(submitKonversiPoinButton, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(67, 67, 67)
@@ -94,7 +108,7 @@ public class TambahKonversiPoin extends javax.swing.JFrame {
                             .addComponent(jLabel5))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(kategoriTextField1, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(poinTextField, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jenisTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE)
                             .addComponent(kategoriTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE))))
                 .addGap(104, 104, 104))
@@ -114,10 +128,10 @@ public class TambahKonversiPoin extends javax.swing.JFrame {
                     .addComponent(kategoriTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(kategoriTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(poinTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
                 .addGap(32, 32, 32)
-                .addComponent(submitJenisKatButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(submitKonversiPoinButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -139,6 +153,20 @@ public class TambahKonversiPoin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void addData(KonversiPoin konversipoin){
+        this.konversiPoinDao = new KonversiPoinDao();
+        konversiPoinFrame = new KonversiPoinFrame( konversiPoinDao);
+        this.konversipoinList = this.konversiPoinDao.findAll();
+        KonversiPoinModelTable konversiPoinModelTable = new KonversiPoinModelTable(konversipoinList);
+        konversiPoinFrame.setModelTable(konversiPoinModelTable);
+        jenisTextField.setText("");
+        kategoriTextField.setText("");
+        poinTextField.setText("");
+    }
+    
+    
+    
+    
     private void jenisTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jenisTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jenisTextFieldActionPerformed
@@ -147,57 +175,28 @@ public class TambahKonversiPoin extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_kategoriTextFieldActionPerformed
 
-    private void submitJenisKatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitJenisKatButtonActionPerformed
+    private void submitKonversiPoinButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitKonversiPoinButtonActionPerformed
         // TODO add your handling code here:
         String jenisSampah = this.jenisTextField.getText();
         String kategoriSampah = this.kategoriTextField.getText();
+        String poinSampah = this.poinTextField.getText();
 
-        JenisKat jenisKat = new JenisKat();
-        jenisKat.setjenisSampah(jenisSampah);
-        jenisKat.setkategoriSampah(kategoriSampah);
+        KonversiPoin konversiPoin = new KonversiPoin();
+        konversiPoin.setjenisSampah(jenisSampah);
+        konversiPoin.setkategoriSampah(kategoriSampah);
+        konversiPoin.setpoinSampah(poinSampah);
+                
+        
 
-        this.jeniskatDao.insert(jenisKat);
-        this.addData(jenisKat);
-    }//GEN-LAST:event_submitJenisKatButtonActionPerformed
+        this.konversiPoinDao.insert(konversiPoin);
+        this.addData(konversiPoin);
+    }//GEN-LAST:event_submitKonversiPoinButtonActionPerformed
 
-    private void kategoriTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kategoriTextField1ActionPerformed
+    private void poinTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_poinTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_kategoriTextField1ActionPerformed
+    }//GEN-LAST:event_poinTextFieldActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TambahKonversiPoin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TambahKonversiPoin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TambahKonversiPoin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TambahKonversiPoin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new TambahKonversiPoin().setVisible(true);
-            }
-        });
-    }
+  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -207,7 +206,7 @@ public class TambahKonversiPoin extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jenisTextField;
     private javax.swing.JTextField kategoriTextField;
-    private javax.swing.JTextField kategoriTextField1;
-    private javax.swing.JButton submitJenisKatButton;
+    private javax.swing.JTextField poinTextField;
+    private javax.swing.JButton submitKonversiPoinButton;
     // End of variables declaration//GEN-END:variables
 }

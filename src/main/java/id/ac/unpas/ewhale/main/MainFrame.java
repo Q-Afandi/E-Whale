@@ -7,9 +7,13 @@ package id.ac.unpas.ewhale.main;
 import id.ac.unpas.ewhale.approval_kurir.KurirFrame;
 import id.ac.unpas.ewhale.approval_masyarakat.MasyarakatFrame;
 import id.ac.unpas.ewhale.dao.JenisKatDao;
+import id.ac.unpas.ewhale.dao.KonversiPoinDao;
 import id.ac.unpas.ewhale.dao.KurirDao;
 import id.ac.unpas.ewhale.dao.MasyarakatDao;
 import id.ac.unpas.ewhale.jenis_kategori.JenisKatFrame;
+import id.ac.unpas.ewhale.konversi_poin.KonversiPoinFrame;
+
+
 
 /**
  *
@@ -22,6 +26,8 @@ public class MainFrame extends javax.swing.JFrame {
      private KurirDao kurirDao;
      private JenisKatFrame jenisKatFrame;
      private JenisKatDao jenisKatDao;
+     private KonversiPoinFrame konversiPoinFrame;
+     private KonversiPoinDao konversiPoinDao;
      
      
      
@@ -263,6 +269,9 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void konversiButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_konversiButtonActionPerformed
         // TODO add your handling code here:
+        konversiPoinDao = new KonversiPoinDao();
+        konversiPoinFrame= new KonversiPoinFrame(konversiPoinDao);
+        konversiPoinFrame.setVisible(true);
     }//GEN-LAST:event_konversiButtonActionPerformed
 
     private void jeniskatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jeniskatButtonActionPerformed
