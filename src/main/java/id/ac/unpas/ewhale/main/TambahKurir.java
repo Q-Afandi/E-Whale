@@ -4,17 +4,44 @@
  */
 package id.ac.unpas.ewhale.main;
 
+import id.ac.unpas.ewhale.approval_kurir.Kurir;
+import id.ac.unpas.ewhale.approval_kurir.KurirFrame;
+import id.ac.unpas.ewhale.approval_kurir.KurirModelTable;
+import id.ac.unpas.ewhale.dao.KurirDao;
+import java.util.List;
+
+
 /**
  *
  * @author ACER
  */
 public class TambahKurir extends javax.swing.JFrame {
 
+    private KurirModelTable modelTable;
+    private KurirDao kurirDao;
+    private KurirFrame kurirFrame;
+    private List<Kurir> kurirList;
+
     /**
      * Creates new form TambahKurir
      */
     public TambahKurir() {
+        this.kurirDao = new KurirDao();
         initComponents();
+        this.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+    }
+    
+    public void addData(Kurir kurir) {
+        this.kurirDao = new KurirDao();
+        kurirFrame = new KurirFrame(kurirDao);
+        this.kurirList = this.kurirDao.findAll();
+        KurirModelTable kurirModelTable = new KurirModelTable(kurirList);
+        kurirFrame.setModelTable(kurirModelTable);
+        namaTextField.setText("");
+        alamatTextField.setText("");
+        noteleponTextField.setText("");
+        noKKTextField.setText("");
+        noKTPTextField.setText("");
     }
 
     /**
@@ -36,7 +63,7 @@ public class TambahKurir extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         noKKTextField = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        submitMasyarakatButton = new javax.swing.JButton();
+        submitKurirButton = new javax.swing.JButton();
         noKTPTextField = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
 
@@ -137,13 +164,13 @@ public class TambahKurir extends javax.swing.JFrame {
                 .addGap(16, 16, 16))
         );
 
-        submitMasyarakatButton.setBackground(new java.awt.Color(0, 153, 51));
-        submitMasyarakatButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        submitMasyarakatButton.setForeground(new java.awt.Color(255, 255, 255));
-        submitMasyarakatButton.setText("Submit");
-        submitMasyarakatButton.addActionListener(new java.awt.event.ActionListener() {
+        submitKurirButton.setBackground(new java.awt.Color(0, 153, 51));
+        submitKurirButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        submitKurirButton.setForeground(new java.awt.Color(255, 255, 255));
+        submitKurirButton.setText("Submit");
+        submitKurirButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                submitMasyarakatButtonActionPerformed(evt);
+                submitKurirButtonActionPerformed(evt);
             }
         });
 
@@ -166,7 +193,7 @@ public class TambahKurir extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(submitMasyarakatButton, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(submitKurirButton, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(73, 73, 73)
                         .addComponent(jLabel6)
@@ -183,7 +210,7 @@ public class TambahKurir extends javax.swing.JFrame {
                     .addComponent(noKTPTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
-                .addComponent(submitMasyarakatButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(submitKurirButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -201,20 +228,24 @@ public class TambahKurir extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_noteleponTextFieldActionPerformed
 
-    private void submitMasyarakatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitMasyarakatButtonActionPerformed
+    private void submitKurirButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitKurirButtonActionPerformed
         // TODO add your handling code here:
         String namaKurir = this.namaTextField.getText();
         String alamatKurir = this.alamatTextField.getText();
         String notelpKurir = this.noteleponTextField.getText();
+        String noKK = this.noKKTextField.getText();
+        String noKTP = this.noKTPTextField.getText();
 
         Kurir kurir = new Kurir();
-        kurir.setNamaMasyarakat(namaKurir);
-        kurir.setAlamatMasyarakat(alamatKurir);
-        kurir.setNoTeleponMasyarakat(notelpKurir);
+        kurir.setNamaKurir(namaKurir);
+        kurir.setAlamatKurir(alamatKurir);
+        kurir.setNoTeleponKurir(notelpKurir);
+        kurir.setNoKK(noKK);
+        kurir.setNoKTP(noKTP);
 
         this.kurirDao.insert(kurir);
         this.addData(kurir);
-    }//GEN-LAST:event_submitMasyarakatButtonActionPerformed
+    }//GEN-LAST:event_submitKurirButtonActionPerformed
 
     private void noKTPTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_noKTPTextFieldActionPerformed
         // TODO add your handling code here:
@@ -272,6 +303,6 @@ public class TambahKurir extends javax.swing.JFrame {
     private javax.swing.JTextField noKKTextField;
     private javax.swing.JTextField noKTPTextField;
     private javax.swing.JTextField noteleponTextField;
-    private javax.swing.JButton submitMasyarakatButton;
+    private javax.swing.JButton submitKurirButton;
     // End of variables declaration//GEN-END:variables
 }

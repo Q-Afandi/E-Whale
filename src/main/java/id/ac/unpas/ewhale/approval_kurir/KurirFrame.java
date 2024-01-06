@@ -4,18 +4,52 @@
  */
 package id.ac.unpas.ewhale.approval_kurir;
 
+
+import id.ac.unpas.ewhale.approval_masyarakat.Masyarakat;
+import id.ac.unpas.ewhale.approval_masyarakat.MasyarakatFrame;
+import id.ac.unpas.ewhale.dao.KurirDao;
+import id.ac.unpas.ewhale.dao.MasyarakatDao;
+import id.ac.unpas.ewhale.main.TambahKurir;
+import id.ac.unpas.ewhale.main.TambahMasyarakat;
+import java.util.List;
 /**
  *
  * @author ACER
  */
 public class KurirFrame extends javax.swing.JFrame {
+    private MasyarakatDao masyarakatDao;
+    private MasyarakatFrame masyarakatFrame;
+    private List<Masyarakat> masyarakatList;
+    private TambahMasyarakat tambahMasyarakat;
+    private KurirModelTable modelTable;
+    private KurirDao kurirDao;
+    private KurirFrame kurirFrame;
+    private List<Kurir> kurirList;
+    private TambahKurir tambahKurir;
+
 
     /**
      * Creates new form KurirFrame
      */
-    public KurirFrame() {
+    public KurirFrame(KurirDao kurirDao) {
+  
+        this.kurirDao = kurirDao;
+        this.kurirList = this.kurirDao.findAll();
+        this.modelTable = new KurirModelTable(kurirList);
         initComponents();
+        this.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     }
+    
+    public void setModelTable(KurirModelTable kurirmodelTable) {
+        // Set this.id dengan parameter id
+        this.modelTable = modelTable;
+    }
+    
+    // Dapatkan nilai dari ids
+    public KurirModelTable getModelTable() {
+        // Kembalikan nilai dari this.id
+        return this.modelTable;
+    }  
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -44,9 +78,11 @@ public class KurirFrame extends javax.swing.JFrame {
         dropboxButton = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
-        tambahmasyarakatButton = new javax.swing.JButton();
+        tambahKurirButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tableKurir = new javax.swing.JTable();
+        terimaKurir = new javax.swing.JButton();
+        tolakKurir = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -67,8 +103,6 @@ public class KurirFrame extends javax.swing.JFrame {
         datamaster.setForeground(new java.awt.Color(204, 204, 204));
         datamaster.setText("DATAMASTER");
 
-        iconMasyarakat.setIcon(new javax.swing.ImageIcon("C:\\Users\\ACER\\OneDrive\\Documents\\NetBeansProjects\\E-Whale\\src\\main\\java\\id\\ac\\unpas\\ewhale\\main\\resources\\approval_masyarakat.png")); // NOI18N
-
         masyarakatButton.setBackground(new java.awt.Color(37, 43, 59));
         masyarakatButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         masyarakatButton.setForeground(new java.awt.Color(255, 255, 255));
@@ -79,8 +113,6 @@ public class KurirFrame extends javax.swing.JFrame {
                 masyarakatButtonActionPerformed(evt);
             }
         });
-
-        iconKurir.setIcon(new javax.swing.ImageIcon("C:\\Users\\ACER\\OneDrive\\Documents\\NetBeansProjects\\E-Whale\\src\\main\\java\\id\\ac\\unpas\\ewhale\\main\\resources\\approval-kurir.png")); // NOI18N
 
         kurirButton.setBackground(new java.awt.Color(37, 43, 59));
         kurirButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -94,8 +126,6 @@ public class KurirFrame extends javax.swing.JFrame {
             }
         });
 
-        iconJeniskat.setIcon(new javax.swing.ImageIcon("C:\\Users\\ACER\\OneDrive\\Documents\\NetBeansProjects\\E-Whale\\src\\main\\java\\id\\ac\\unpas\\ewhale\\main\\resources\\jenis-dan-kategori.png")); // NOI18N
-
         jeniskatButton.setBackground(new java.awt.Color(37, 43, 59));
         jeniskatButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jeniskatButton.setForeground(new java.awt.Color(255, 255, 255));
@@ -107,8 +137,6 @@ public class KurirFrame extends javax.swing.JFrame {
             }
         });
 
-        iconKonversi.setIcon(new javax.swing.ImageIcon("C:\\Users\\ACER\\OneDrive\\Documents\\NetBeansProjects\\E-Whale\\src\\main\\java\\id\\ac\\unpas\\ewhale\\main\\resources\\konversi-poin.png")); // NOI18N
-
         konversiButton.setBackground(new java.awt.Color(37, 43, 59));
         konversiButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         konversiButton.setForeground(new java.awt.Color(255, 255, 255));
@@ -119,8 +147,6 @@ public class KurirFrame extends javax.swing.JFrame {
                 konversiButtonActionPerformed(evt);
             }
         });
-
-        iconDropbox.setIcon(new javax.swing.ImageIcon("C:\\Users\\ACER\\OneDrive\\Documents\\NetBeansProjects\\E-Whale\\src\\main\\java\\id\\ac\\unpas\\ewhale\\main\\resources\\drop-box.png")); // NOI18N
 
         dropboxButton.setBackground(new java.awt.Color(37, 43, 59));
         dropboxButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -218,18 +244,37 @@ public class KurirFrame extends javax.swing.JFrame {
         jPanel9.setBackground(new java.awt.Color(255, 255, 255));
         jPanel9.setBorder(javax.swing.BorderFactory.createEtchedBorder(null, new java.awt.Color(204, 204, 204)));
 
-        tambahmasyarakatButton.setBackground(new java.awt.Color(51, 102, 0));
-        tambahmasyarakatButton.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        tambahmasyarakatButton.setForeground(new java.awt.Color(255, 255, 255));
-        tambahmasyarakatButton.setText("Tambah Data");
-        tambahmasyarakatButton.addActionListener(new java.awt.event.ActionListener() {
+        tambahKurirButton.setBackground(new java.awt.Color(51, 102, 0));
+        tambahKurirButton.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        tambahKurirButton.setForeground(new java.awt.Color(255, 255, 255));
+        tambahKurirButton.setText("Tambah Data");
+        tambahKurirButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tambahmasyarakatButtonActionPerformed(evt);
+                tambahKurirButtonActionPerformed(evt);
             }
         });
 
-        jTable1.setModel(modelTable);
-        jScrollPane1.setViewportView(jTable1);
+        tableKurir.setModel(modelTable);
+        jScrollPane1.setViewportView(tableKurir);
+
+        terimaKurir.setBackground(new java.awt.Color(51, 102, 0));
+        terimaKurir.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        terimaKurir.setText("Terima");
+        terimaKurir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                terimaKurirActionPerformed(evt);
+            }
+        });
+
+        tolakKurir.setBackground(new java.awt.Color(242, 0, 0));
+        tolakKurir.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        tolakKurir.setForeground(new java.awt.Color(255, 255, 255));
+        tolakKurir.setText("Tolak");
+        tolakKurir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tolakKurirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -238,17 +283,27 @@ public class KurirFrame extends javax.swing.JFrame {
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 716, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 716, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(24, Short.MAX_VALUE))
                     .addGroup(jPanel9Layout.createSequentialGroup()
                         .addGap(14, 14, 14)
-                        .addComponent(tambahmasyarakatButton)))
-                .addContainerGap(24, Short.MAX_VALUE))
+                        .addComponent(tambahKurirButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(terimaKurir)
+                        .addGap(35, 35, 35)
+                        .addComponent(tolakKurir)
+                        .addGap(76, 76, 76))))
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addContainerGap(69, Short.MAX_VALUE)
-                .addComponent(tambahmasyarakatButton)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tambahKurirButton)
+                    .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(terimaKurir)
+                        .addComponent(tolakKurir)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20))
@@ -272,8 +327,6 @@ public class KurirFrame extends javax.swing.JFrame {
         );
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 73, 790, 552));
-
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\ACER\\OneDrive\\Documents\\NetBeansProjects\\E-Whale\\src\\main\\java\\id\\ac\\unpas\\ewhale\\main\\resources\\Tampilan Dashboard.png")); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 625));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -292,13 +345,16 @@ public class KurirFrame extends javax.swing.JFrame {
 
     private void masyarakatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_masyarakatButtonActionPerformed
         // TODO add your handling code here:
-        kurirDao = new kurirDao();
-        kurirFrame = new kurirFrame(kurirDao);
-        kurirFrame.setVisible(true);
+        masyarakatDao = new MasyarakatDao();
+        masyarakatFrame = new MasyarakatFrame(masyarakatDao);
+        masyarakatFrame.setVisible(true);
     }//GEN-LAST:event_masyarakatButtonActionPerformed
 
     private void kurirButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kurirButtonActionPerformed
         // TODO add your handling code here:
+        kurirDao = new KurirDao();
+        kurirFrame = new KurirFrame(kurirDao);
+        kurirFrame.setVisible(true);
     }//GEN-LAST:event_kurirButtonActionPerformed
 
     private void jeniskatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jeniskatButtonActionPerformed
@@ -313,46 +369,99 @@ public class KurirFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_dropboxButtonActionPerformed
 
-    private void tambahmasyarakatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahmasyarakatButtonActionPerformed
+    private void tambahKurirButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahKurirButtonActionPerformed
         // TODO add your handling code here:
         tambahKurir = new TambahKurir();
         tambahKurir.setVisible(true);
-    }//GEN-LAST:event_tambahmasyarakatButtonActionPerformed
+    }//GEN-LAST:event_tambahKurirButtonActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
+    private void terimaKurirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_terimaKurirActionPerformed
+        // TODO add your handling code here:
+        int row = this.tableKurir.getSelectedRow();
+        int column = this.tableKurir.getSelectedColumn();
+
+        if (row == -1 || column == -1) {
+            return;
+        } else {
+            String newValue = (String) this.tableKurir.getModel().getValueAt(row, column);
+
+            Kurir id = new Kurir();
+
+            String col = "";
+
+            switch (column) {
+                case 0:
+                col = "namaKurir";
+                break;
+                case 1:
+                col = "noTeleponKurir";
+                break;
+                case 2:
+                col = "alamatKurir";
+                break;
+                case 3:
+                col = "noKK";
+                break;
+                case 4:
+                col = "noKTP";
+                break;
+                default:
+                System.out.println("Kolom tidak ditemukan");
+                break;
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(KurirFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(KurirFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(KurirFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(KurirFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            id = this.kurirDao.select(col, newValue);
+
+            this.delete(id);
+            this.kurirDao.delete(id);
         }
-        //</editor-fold>
+    }//GEN-LAST:event_terimaKurirActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new KurirFrame().setVisible(true);
-            }
-        });
+        // Method untuk menghapus permintaan ke tableModel
+    public void delete(Kurir kurir) {
+        // Tambahkan permintaan ke tableModel
+        modelTable.delete(kurir);
     }
+    
+    private void tolakKurirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tolakKurirActionPerformed
+        // TODO add your handling code here:
+              int row = this.tableKurir.getSelectedRow();
+        int column = this.tableKurir.getSelectedColumn();
+
+        if (row == -1 || column == -1) {
+            return;
+        } else {
+            String newValue = (String) this.tableKurir.getModel().getValueAt(row, column);
+
+            Kurir id = new Kurir();
+
+            String col = "";
+
+            switch (column) {
+                case 0:
+                col = "namaKurir";
+                break;
+                case 1:
+                col = "noTeleponKurir";
+                break;
+                case 2:
+                col = "alamatKurir";
+                break;
+                case 3:
+                col = "noKK";
+                break;
+                case 4:
+                col = "noKTP";
+                break;
+                default:
+                System.out.println("Kolom tidak ditemukan");
+                break;
+            }
+            id = this.kurirDao.select(col, newValue);
+
+            this.delete(id);
+            this.kurirDao.delete(id);
+        }
+    }//GEN-LAST:event_tolakKurirActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel approvalregistrasi;
@@ -371,11 +480,13 @@ public class KurirFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JTable jTable1;
     private javax.swing.JButton jeniskatButton;
     private javax.swing.JButton konversiButton;
     private javax.swing.JButton kurirButton;
     private javax.swing.JButton masyarakatButton;
-    private javax.swing.JButton tambahmasyarakatButton;
+    private javax.swing.JTable tableKurir;
+    private javax.swing.JButton tambahKurirButton;
+    private javax.swing.JButton terimaKurir;
+    private javax.swing.JButton tolakKurir;
     // End of variables declaration//GEN-END:variables
 }

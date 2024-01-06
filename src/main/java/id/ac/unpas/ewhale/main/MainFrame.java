@@ -4,7 +4,9 @@
  */
 package id.ac.unpas.ewhale.main;
 
+import id.ac.unpas.ewhale.approval_kurir.KurirFrame;
 import id.ac.unpas.ewhale.approval_masyarakat.MasyarakatFrame;
+import id.ac.unpas.ewhale.dao.KurirDao;
 import id.ac.unpas.ewhale.dao.MasyarakatDao;
 
 /**
@@ -14,6 +16,9 @@ import id.ac.unpas.ewhale.dao.MasyarakatDao;
 public class MainFrame extends javax.swing.JFrame {
      private MasyarakatFrame masyarakatFrame;
      private MasyarakatDao masyarakatDao;
+     private KurirFrame kurirFrame;
+     private KurirDao kurirDao;
+     
      
 
     /**
@@ -261,6 +266,9 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void kurirButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kurirButtonActionPerformed
         // TODO add your handling code here:
+        kurirDao = new KurirDao();
+        kurirFrame = new KurirFrame(kurirDao);
+        kurirFrame.setVisible(true);
     }//GEN-LAST:event_kurirButtonActionPerformed
 
     private void masyarakatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_masyarakatButtonActionPerformed
