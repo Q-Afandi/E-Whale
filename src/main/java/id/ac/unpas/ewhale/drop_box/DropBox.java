@@ -9,5 +9,83 @@ package id.ac.unpas.ewhale.drop_box;
  * @author ACER
  */
 public class DropBox {
+    private String idSampah; // Variable id untuk menyimpan nilai id
+    private String jenisSampah; // Variable nama untuk menyimpan nilai nama
+    private String kategoriSampah; // Variable noTelepon untuk menyimpan nilai noTelepon
+    private String poinSampah;
+    private String idMasyarakat;
+    // Set nilai dari id dengan parameter id
+    private String namaMasyarakat;
+    private String alamatMasyarakat;
     
+    public void setidSampah(String id) {
+        // Set this.id dengan parameter id
+        this.idSampah = id;
+    }
+    
+    // Dapatkan nilai dari id
+    public String getidSampah() {
+        // Kembalikan nilai dari this.id
+        return this.idSampah;
+    } 
+    
+    // Set nilai dari nama dengan parameter nama
+    public void setjenisSampah(String jenis) {
+        // Set this.nama dengan parameter nama
+        this.jenisSampah = jenis;
+    }
+    
+    // Dapatkan nilai dari nama
+    public String getjenisSampah() {
+        // Kembalikan nilai dari this.nama
+        return this.jenisSampah;
+    } 
+    
+    // Set nilai dari noTelepon dengan parameter noTelepon
+    public void setkategoriSampah(String kategori) {
+        // Set this.noTelepon dengan parameter noTelepon
+        this.kategoriSampah = kategori;
+    }
+    
+    // Dapatkan nilai dari noTelepon
+    public String getkategoriSampah() {
+        // Kembalikan nilai dari this.noTelepon
+        return this.kategoriSampah;
+    }
+    
+    public void setpoinSampah(String poin) {
+        this.poinSampah = poin;
+    }
+    
+     public String getpoinSampah() {
+        // Kembalikan nilai dari this.noTelepon
+        return this.poinSampah;
+    }
+    
+    public void setidMasyarakat(String id) {
+        // Set this.id dengan parameter id
+        this.idMasyarakat = id;
+    }
+    
+    // Dapatkan nilai dari id
+    public String getidMasyarakat() {
+        // Kembalikan nilai dari this.id
+        return this.idMasyarakat;
+    } 
+
+    public void setnamaMasyarakat(String nama) {
+        this.namaMasyarakat = nama;
+    }
+    
+    public String getnamaMasyarakat() {
+        return this.namaMasyarakat;
+    }
+    public void setalamatMasyarakat(String alamat) {
+        this.namaMasyarakat = alamat;
+    }
+    
+    public String getalamatMasyarakat() {
+        return this.alamatMasyarakat;
+    }
 }
+

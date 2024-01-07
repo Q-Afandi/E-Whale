@@ -12,6 +12,9 @@ import id.ac.unpas.ewhale.dao.KurirDao;
 import id.ac.unpas.ewhale.dao.MasyarakatDao;
 import id.ac.unpas.ewhale.jenis_kategori.JenisKatFrame;
 import id.ac.unpas.ewhale.konversi_poin.KonversiPoinFrame;
+import id.ac.unpas.ewhale.dao.DropBoxDao;
+import id.ac.unpas.ewhale.drop_box.DropBoxFrame;
+
 
 
 
@@ -28,7 +31,8 @@ public class MainFrame extends javax.swing.JFrame {
      private JenisKatDao jenisKatDao;
      private KonversiPoinFrame konversiPoinFrame;
      private KonversiPoinDao konversiPoinDao;
-     
+     private DropBoxDao dropBoxDao;
+     private DropBoxFrame dropBoxFrame;
      
      
 
@@ -264,7 +268,9 @@ public class MainFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void dropboxButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dropboxButtonActionPerformed
-        // TODO add your handling code here:
+        dropBoxDao = new DropBoxDao();
+        dropBoxFrame = new DropBoxFrame(dropBoxDao);
+        dropBoxFrame.setVisible(true);
     }//GEN-LAST:event_dropboxButtonActionPerformed
 
     private void konversiButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_konversiButtonActionPerformed
