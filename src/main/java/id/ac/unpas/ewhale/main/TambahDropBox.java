@@ -4,6 +4,14 @@
  */
 package id.ac.unpas.ewhale.main;
 
+import id.ac.unpas.ewhale.dao.DropBoxDao;
+import id.ac.unpas.ewhale.dao.JenisKatDao;
+import id.ac.unpas.ewhale.dao.KonversiPoinDao;
+import id.ac.unpas.ewhale.drop_box.DropBox;
+import id.ac.unpas.ewhale.drop_box.DropBoxFrame;
+import id.ac.unpas.ewhale.drop_box.DropBoxModelTable;
+import java.util.List;
+
 /**
  *
  * @author ACER
@@ -13,8 +21,14 @@ public class TambahDropBox extends javax.swing.JFrame {
     /**
      * Creates new form TambahDropBox
      */
+    private DropBoxModelTable modelTable;
+    private DropBoxDao dropBoxDao;
+    private DropBoxFrame dropBoxFrame;
+    private List<DropBox> dropBoxList;
     public TambahDropBox() {
+         this.dropBoxDao = new DropBoxDao();
         initComponents();
+        this.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     }
 
     /**
@@ -32,13 +46,13 @@ public class TambahDropBox extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         alamatTextField = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        noteleponTextField = new javax.swing.JTextField();
+        jenisTextField = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        noKKTextField = new javax.swing.JTextField();
+        poinTextField = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        noKKTextField1 = new javax.swing.JTextField();
+        kategoriTextField = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        submitDropBox = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -61,65 +75,70 @@ public class TambahDropBox extends javax.swing.JFrame {
 
         jLabel3.setText("Poin Sampah");
 
-        noteleponTextField.addActionListener(new java.awt.event.ActionListener() {
+        jenisTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                noteleponTextFieldActionPerformed(evt);
+                jenisTextFieldActionPerformed(evt);
             }
         });
 
         jLabel4.setText("Jenis Sampah");
 
-        noKKTextField.addActionListener(new java.awt.event.ActionListener() {
+        poinTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                noKKTextFieldActionPerformed(evt);
+                poinTextFieldActionPerformed(evt);
             }
         });
 
         jLabel5.setText("Alamat");
 
-        noKKTextField1.addActionListener(new java.awt.event.ActionListener() {
+        kategoriTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                noKKTextField1ActionPerformed(evt);
+                kategoriTextFieldActionPerformed(evt);
             }
         });
 
         jLabel6.setText("Kategori Sampah");
 
-        jButton1.setBackground(new java.awt.Color(0, 153, 0));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Submit");
+        submitDropBox.setBackground(new java.awt.Color(0, 153, 0));
+        submitDropBox.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        submitDropBox.setForeground(new java.awt.Color(255, 255, 255));
+        submitDropBox.setText("Submit");
+        submitDropBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                submitDropBoxActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(212, 212, 212))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(67, 67, 67)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(noteleponTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(alamatTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE)
-                                .addComponent(namaTextField))
-                            .addComponent(noKKTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(noKKTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(67, 67, 67)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jenisTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(alamatTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE)
+                        .addComponent(namaTextField))
+                    .addComponent(kategoriTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(poinTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(104, 104, 104))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(212, 212, 212))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(submitDropBox)
+                        .addGap(134, 134, 134))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -136,19 +155,19 @@ public class TambahDropBox extends javax.swing.JFrame {
                     .addComponent(jLabel5))
                 .addGap(33, 33, 33)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(noteleponTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jenisTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addGap(35, 35, 35)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(noKKTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(kategoriTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
                 .addGap(32, 32, 32)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(noKKTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(poinTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(16, 16, 16))
+                .addGap(18, 18, 18)
+                .addComponent(submitDropBox)
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -160,7 +179,7 @@ public class TambahDropBox extends javax.swing.JFrame {
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addContainerGap(7, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -173,7 +192,18 @@ public class TambahDropBox extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+public void addData(DropBox dropBox) {
+        this.dropBoxDao = new DropBoxDao();
+        dropBoxFrame = new DropBoxFrame(dropBoxDao);    
+        this.dropBoxList = this.dropBoxDao.findAll();
+        DropBoxModelTable dropBoxModelTable = new DropBoxModelTable(dropBoxList);
+        dropBoxFrame.setModelTable(dropBoxModelTable);
+        namaTextField.setText("");
+        alamatTextField.setText("");
+        jenisTextField.setText("");
+        kategoriTextField.setText("");
+        poinTextField.setText("");
+    }
     private void namaTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_namaTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_namaTextFieldActionPerformed
@@ -182,56 +212,40 @@ public class TambahDropBox extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_alamatTextFieldActionPerformed
 
-    private void noteleponTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_noteleponTextFieldActionPerformed
+    private void jenisTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jenisTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_noteleponTextFieldActionPerformed
+    }//GEN-LAST:event_jenisTextFieldActionPerformed
 
-    private void noKKTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_noKKTextFieldActionPerformed
+    private void poinTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_poinTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_noKKTextFieldActionPerformed
+    }//GEN-LAST:event_poinTextFieldActionPerformed
 
-    private void noKKTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_noKKTextField1ActionPerformed
+    private void kategoriTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kategoriTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_noKKTextField1ActionPerformed
+    }//GEN-LAST:event_kategoriTextFieldActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TambahDropBox.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TambahDropBox.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TambahDropBox.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TambahDropBox.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void submitDropBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitDropBoxActionPerformed
+        // TODO add your handling code here:
+        String namaMasyarakat = this.namaTextField.getText();
+        String alamatMasyarakat = this.alamatTextField.getText();
+        String jenisSampah = this.jenisTextField.getText();
+        String KategoriSampah = this.kategoriTextField.getText();
+        String poinSampah = this.poinTextField.getText();
+        
+        DropBox dropBox = new DropBox();
+        dropBox.setnamaMasyarakat(namaMasyarakat);
+        dropBox.setalamatMasyarakat(alamatMasyarakat);
+        dropBox.setjenisSampah(jenisSampah);
+        dropBox.setkategoriSampah(KategoriSampah);
+        dropBox.setpoinSampah(poinSampah);
+        
+        this.dropBoxDao.insert(dropBox);
+        this.addData(dropBox);
+    }//GEN-LAST:event_submitDropBoxActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new TambahDropBox().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField alamatTextField;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -239,9 +253,10 @@ public class TambahDropBox extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JTextField jenisTextField;
+    private javax.swing.JTextField kategoriTextField;
     private javax.swing.JTextField namaTextField;
-    private javax.swing.JTextField noKKTextField;
-    private javax.swing.JTextField noKKTextField1;
-    private javax.swing.JTextField noteleponTextField;
+    private javax.swing.JTextField poinTextField;
+    private javax.swing.JButton submitDropBox;
     // End of variables declaration//GEN-END:variables
 }

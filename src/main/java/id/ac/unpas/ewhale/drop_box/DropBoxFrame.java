@@ -8,13 +8,75 @@ package id.ac.unpas.ewhale.drop_box;
  *
  * @author ACER
  */
+import id.ac.unpas.ewhale.approval_kurir.Kurir;
+import id.ac.unpas.ewhale.approval_kurir.KurirFrame;
+import id.ac.unpas.ewhale.approval_masyarakat.Masyarakat;
+import id.ac.unpas.ewhale.approval_masyarakat.MasyarakatFrame;
+import id.ac.unpas.ewhale.dao.JenisKatDao;
+import id.ac.unpas.ewhale.dao.KonversiPoinDao;
+import id.ac.unpas.ewhale.dao.KurirDao;
+import id.ac.unpas.ewhale.dao.MasyarakatDao;
+import id.ac.unpas.ewhale.dao.DropBoxDao;
+import id.ac.unpas.ewhale.jenis_kategori.JenisKat;
+import id.ac.unpas.ewhale.jenis_kategori.JenisKatFrame;
+import id.ac.unpas.ewhale.konversi_poin.KonversiPoin;
+import id.ac.unpas.ewhale.konversi_poin.KonversiPoinFrame;
+import id.ac.unpas.ewhale.konversi_poin.KonversiPoinModelTable;
+import id.ac.unpas.ewhale.main.TambahJenisKat;
+import id.ac.unpas.ewhale.main.TambahKonversiPoin;
+import id.ac.unpas.ewhale.main.TambahKurir;
+import id.ac.unpas.ewhale.main.TambahMasyarakat;
+import id.ac.unpas.ewhale.drop_box.DropBox;
+import id.ac.unpas.ewhale.drop_box.DropBoxFrame;
+import id.ac.unpas.ewhale.drop_box.DropBoxModelTable;
+import id.ac.unpas.ewhale.main.TambahDropBox;
+import java.util.List;
+
+
+
+
 public class DropBoxFrame extends javax.swing.JFrame {
 
-    /**
-     * Creates new form DropBoxFrame
-     */
-    public DropBoxFrame() {
+    private MasyarakatDao masyarakatDao;
+    private MasyarakatFrame masyarakatFrame;
+    private List<Masyarakat> masyarakatList;
+    private TambahMasyarakat tambahMasyarakat;
+//    private KurirModelTable modelTable;
+    private KurirDao kurirDao;
+    private KurirFrame kurirFrame;
+    private List<Kurir> kurirList;
+    private TambahKurir tambahKurir;
+    private TambahJenisKat tambahJenisKat;
+    private List<JenisKat> jeniskatList;
+    private JenisKatFrame jenisKatFrame;
+    private JenisKatDao jenisKatDao;
+    private TambahKonversiPoin  tambahKonversiPoin;
+    private List<KonversiPoin> poinList;
+    private KonversiPoinFrame konversiPoinFrame;
+    private KonversiPoinDao konversiPoinDao;
+    private DropBoxModelTable modelTable;
+    private DropBoxDao dropBoxDao;
+    private List<DropBox> dropBoxList;
+    private TambahDropBox tambahDropBox;
+    private DropBoxFrame dropBoxFrame;
+    
+    
+    public DropBoxFrame(DropBoxDao dropBoxDao) {
+        this.dropBoxDao = dropBoxDao;
+        this.dropBoxList = this.dropBoxDao.findAll();
+        this.modelTable = new DropBoxModelTable(dropBoxList);
         initComponents();
+        this.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+    }
+
+    public void setModelTable(DropBoxModelTable dropboxmodelTable) {
+        // Set this.id dengan parameter id
+        this.modelTable = modelTable;
+    }
+
+        public DropBoxModelTable getModelTable() {
+        // Kembalikan nilai dari this.id
+        return this.modelTable;
     }
 
     /**
@@ -44,11 +106,11 @@ public class DropBoxFrame extends javax.swing.JFrame {
         dropboxButton = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
-        tambahKonversiPoinButton = new javax.swing.JButton();
+        tambahDropBoxButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tableKonversiPoin = new javax.swing.JTable();
-        hapusKonversiPoinButton = new javax.swing.JButton();
-        ubahKonversiPoinButton = new javax.swing.JButton();
+        tableDropBox = new javax.swing.JTable();
+        hapusDropBox = new javax.swing.JButton();
+        ubahDropBox = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -210,36 +272,36 @@ public class DropBoxFrame extends javax.swing.JFrame {
         jPanel9.setBackground(new java.awt.Color(255, 255, 255));
         jPanel9.setBorder(javax.swing.BorderFactory.createEtchedBorder(null, new java.awt.Color(204, 204, 204)));
 
-        tambahKonversiPoinButton.setBackground(new java.awt.Color(51, 102, 0));
-        tambahKonversiPoinButton.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        tambahKonversiPoinButton.setForeground(new java.awt.Color(255, 255, 255));
-        tambahKonversiPoinButton.setText("Tambah Data");
-        tambahKonversiPoinButton.addActionListener(new java.awt.event.ActionListener() {
+        tambahDropBoxButton.setBackground(new java.awt.Color(51, 102, 0));
+        tambahDropBoxButton.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        tambahDropBoxButton.setForeground(new java.awt.Color(255, 255, 255));
+        tambahDropBoxButton.setText("Tambah Data");
+        tambahDropBoxButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tambahKonversiPoinButtonActionPerformed(evt);
+                tambahDropBoxButtonActionPerformed(evt);
             }
         });
 
-        tableKonversiPoin.setModel(modelTable);
-        jScrollPane1.setViewportView(tableKonversiPoin);
+        tableDropBox.setModel(modelTable);
+        jScrollPane1.setViewportView(tableDropBox);
 
-        hapusKonversiPoinButton.setBackground(new java.awt.Color(255, 0, 0));
-        hapusKonversiPoinButton.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        hapusKonversiPoinButton.setForeground(new java.awt.Color(255, 255, 255));
-        hapusKonversiPoinButton.setText("Hapus Data");
-        hapusKonversiPoinButton.addActionListener(new java.awt.event.ActionListener() {
+        hapusDropBox.setBackground(new java.awt.Color(255, 0, 0));
+        hapusDropBox.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        hapusDropBox.setForeground(new java.awt.Color(255, 255, 255));
+        hapusDropBox.setText("Hapus Data");
+        hapusDropBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                hapusKonversiPoinButtonActionPerformed(evt);
+                hapusDropBoxActionPerformed(evt);
             }
         });
 
-        ubahKonversiPoinButton.setBackground(new java.awt.Color(255, 255, 0));
-        ubahKonversiPoinButton.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        ubahKonversiPoinButton.setForeground(new java.awt.Color(255, 255, 255));
-        ubahKonversiPoinButton.setText("Edit Data");
-        ubahKonversiPoinButton.addActionListener(new java.awt.event.ActionListener() {
+        ubahDropBox.setBackground(new java.awt.Color(255, 255, 0));
+        ubahDropBox.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        ubahDropBox.setForeground(new java.awt.Color(255, 255, 255));
+        ubahDropBox.setText("Edit Data");
+        ubahDropBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ubahKonversiPoinButtonActionPerformed(evt);
+                ubahDropBoxActionPerformed(evt);
             }
         });
 
@@ -253,11 +315,11 @@ public class DropBoxFrame extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 716, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel9Layout.createSequentialGroup()
                         .addGap(14, 14, 14)
-                        .addComponent(tambahKonversiPoinButton)
+                        .addComponent(tambahDropBoxButton)
                         .addGap(18, 18, 18)
-                        .addComponent(ubahKonversiPoinButton)
+                        .addComponent(ubahDropBox)
                         .addGap(18, 18, 18)
-                        .addComponent(hapusKonversiPoinButton)))
+                        .addComponent(hapusDropBox)))
                 .addContainerGap(24, Short.MAX_VALUE))
         );
         jPanel9Layout.setVerticalGroup(
@@ -265,9 +327,9 @@ public class DropBoxFrame extends javax.swing.JFrame {
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addContainerGap(69, Short.MAX_VALUE)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tambahKonversiPoinButton)
-                    .addComponent(hapusKonversiPoinButton)
-                    .addComponent(ubahKonversiPoinButton))
+                    .addComponent(tambahDropBoxButton)
+                    .addComponent(hapusDropBox)
+                    .addComponent(ubahDropBox))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20))
@@ -336,94 +398,74 @@ public class DropBoxFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_konversiButtonActionPerformed
 
     private void dropboxButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dropboxButtonActionPerformed
-        // TODO add your handling code here:
+         dropBoxDao = new DropBoxDao();
+        dropBoxFrame = new DropBoxFrame(dropBoxDao);
+        dropBoxFrame.setVisible(true);
     }//GEN-LAST:event_dropboxButtonActionPerformed
-
-    private void tambahKonversiPoinButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahKonversiPoinButtonActionPerformed
+       
+    private void tambahDropBoxButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahDropBoxButtonActionPerformed
         // TODO add your handling code here:
-        tambahKonversiPoin = new TambahKonversiPoin();
-        tambahKonversiPoin.setVisible(true);
-    }//GEN-LAST:event_tambahKonversiPoinButtonActionPerformed
+        tambahDropBox = new TambahDropBox();
+        tambahDropBox.setVisible(true);
+    }//GEN-LAST:event_tambahDropBoxButtonActionPerformed
 
-    private void hapusKonversiPoinButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hapusKonversiPoinButtonActionPerformed
+    private void hapusDropBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hapusDropBoxActionPerformed
         // TODO add your handling code here:
-        int row = this.tableKonversiPoin.getSelectedRow();
-        int column = this.tableKonversiPoin.getSelectedColumn();
+        int row = this.tableDropBox.getSelectedRow();
+        int column = this.tableDropBox.getSelectedColumn();
 
         if (row == -1 || column == -1) {
             return;
         } else {
-            String newValue = (String) this.tableKonversiPoin.getModel().getValueAt(row, column);
+            String newValue = (String) this.tableDropBox.getModel().getValueAt(row, column);
 
-            KonversiPoin id = new KonversiPoin();
+            DropBox id = new DropBox();
 
             String col = "";
 
             switch (column) {
                 case 0:
-                col = "jenisSampah";
+                col = "namaMasyarakat";
                 break;
                 case 1:
-                col = "kategoriSampah";
+                col = "alamatMasyarakat";
                 break;
                 case 2:
+                col = "jenisSampah";
+                break;
+                case 3:
+                col = "kategoriSampah";
+                break;
+                case 4:
                 col = "poinSampah";
                 break;
                 default:
                 System.out.println("Kolom tidak ditemukan");
                 break;
             }
-            id = this.konversiPoinDao.select(col, newValue);
+            id = this.dropBoxDao.select(col, newValue);
 
             this.delete(id);
-            this.konversiPoinDao.delete(id);
+            this.dropBoxDao.delete(id);
         }
-    }//GEN-LAST:event_hapusKonversiPoinButtonActionPerformed
-
-    private void ubahKonversiPoinButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ubahKonversiPoinButtonActionPerformed
+    }//GEN-LAST:event_hapusDropBoxActionPerformed
+public void delete(DropBox dropBox) {
+                   // Tambahkan permintaan ke tableModel
+        modelTable.delete(dropBox);
+    }
+    private void ubahDropBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ubahDropBoxActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_ubahKonversiPoinButtonActionPerformed
+    }//GEN-LAST:event_ubahDropBoxActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DropBoxFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DropBoxFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DropBoxFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DropBoxFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new DropBoxFrame().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel approvalregistrasi;
     private javax.swing.JLabel datamaster;
     private javax.swing.JButton dropboxButton;
-    private javax.swing.JButton hapusKonversiPoinButton;
+    private javax.swing.JButton hapusDropBox;
     private javax.swing.JLabel iconDropbox;
     private javax.swing.JLabel iconJeniskat;
     private javax.swing.JLabel iconKonversi;
@@ -441,8 +483,8 @@ public class DropBoxFrame extends javax.swing.JFrame {
     private javax.swing.JButton konversiButton;
     private javax.swing.JButton kurirButton;
     private javax.swing.JButton masyarakatButton;
-    private javax.swing.JTable tableKonversiPoin;
-    private javax.swing.JButton tambahKonversiPoinButton;
-    private javax.swing.JButton ubahKonversiPoinButton;
+    private javax.swing.JTable tableDropBox;
+    private javax.swing.JButton tambahDropBoxButton;
+    private javax.swing.JButton ubahDropBox;
     // End of variables declaration//GEN-END:variables
 }
