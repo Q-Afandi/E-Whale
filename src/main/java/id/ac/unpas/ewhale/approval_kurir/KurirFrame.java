@@ -12,6 +12,7 @@ import id.ac.unpas.ewhale.dao.MasyarakatDao;
 import id.ac.unpas.ewhale.main.TambahKurir;
 import id.ac.unpas.ewhale.main.TambahMasyarakat;
 import java.util.List;
+import javax.swing.JOptionPane;
 /**
  *
  * @author ACER
@@ -381,6 +382,7 @@ public class KurirFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         int row = this.tableKurir.getSelectedRow();
         int column = this.tableKurir.getSelectedColumn();
+        int response = JOptionPane.showConfirmDialog(this, "Apakah anda yakin ingin menerima kurir ini?", "Konfirmasi", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 
         if (row == -1 || column == -1) {
             return;
@@ -411,10 +413,19 @@ public class KurirFrame extends javax.swing.JFrame {
                 System.out.println("Kolom tidak ditemukan");
                 break;
             }
-            id = this.kurirDao.select(col, newValue);
+            if(response==JOptionPane.YES_OPTION) {
+                JOptionPane.showMessageDialog(this, "Kurir berhasil diterima");
+                
+                id = this.kurirDao.select(col, newValue);
 
-            this.delete(id);
-            this.kurirDao.delete(id);
+                this.delete(id);
+                this.kurirDao.delete(id);
+            }else if(response==JOptionPane.NO_OPTION){
+                   JOptionPane.showMessageDialog(this, "Kurir gagal diterima");
+                   
+            }else if(response==JOptionPane.CLOSED_OPTION) {
+                System.out.println("Closed");
+            }
         }
     }//GEN-LAST:event_terimaKurirActionPerformed
 
@@ -426,8 +437,10 @@ public class KurirFrame extends javax.swing.JFrame {
     
     private void tolakKurirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tolakKurirActionPerformed
         // TODO add your handling code here:
-              int row = this.tableKurir.getSelectedRow();
+        int row = this.tableKurir.getSelectedRow();
         int column = this.tableKurir.getSelectedColumn();
+        int response = JOptionPane.showConfirmDialog(this, "Apakah anda yakin ingin menolak kurir ini?", "Konfirmasi", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+
 
         if (row == -1 || column == -1) {
             return;
@@ -458,10 +471,19 @@ public class KurirFrame extends javax.swing.JFrame {
                 System.out.println("Kolom tidak ditemukan");
                 break;
             }
-            id = this.kurirDao.select(col, newValue);
+            if(response==JOptionPane.YES_OPTION) {
+                JOptionPane.showMessageDialog(this, "Kurir berhasil ditolak");
+                
+                id = this.kurirDao.select(col, newValue);
 
-            this.delete(id);
-            this.kurirDao.delete(id);
+                this.delete(id);
+                this.kurirDao.delete(id);
+            }else if(response==JOptionPane.NO_OPTION){
+                   JOptionPane.showMessageDialog(this, "Kurir gagal ditolak");
+                   
+            }else if(response==JOptionPane.CLOSED_OPTION) {
+                System.out.println("Closed");
+            }
         }
     }//GEN-LAST:event_tolakKurirActionPerformed
 
