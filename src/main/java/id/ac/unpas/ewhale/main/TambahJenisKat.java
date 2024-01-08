@@ -69,7 +69,7 @@ public class TambahJenisKat extends javax.swing.JFrame {
 
         submitJenisKatButton.setBackground(new java.awt.Color(0, 153, 0));
         submitJenisKatButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        submitJenisKatButton.setForeground(new java.awt.Color(255, 255, 255));
+        submitJenisKatButton.setForeground(new java.awt.Color(0, 0, 0));
         submitJenisKatButton.setText("Submit");
         submitJenisKatButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

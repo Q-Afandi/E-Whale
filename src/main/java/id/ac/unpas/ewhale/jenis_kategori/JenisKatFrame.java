@@ -51,6 +51,7 @@ public class JenisKatFrame extends javax.swing.JFrame {
         initComponents();
         this.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     }
+    
     public void setModelTable(JenisKatModelTable jeniskatmodelTable) {
         // Set this.id dengan parameter id
         this.modelTable = modelTable;
@@ -452,13 +453,13 @@ public class JenisKatFrame extends javax.swing.JFrame {
 
 //            this.update(id);
 //            this.jenisKatDao.update(id);
-                ubahJenisKat = new UbahJenisKat();
+                ubahJenisKat = new UbahJenisKat(id);
                 ubahJenisKat.setVisible(true);
         }
     }//GEN-LAST:event_ubahJenisKatButtonActionPerformed
 
-    
-    
+
+ 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel approvalregistrasi;
