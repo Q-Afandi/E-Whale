@@ -14,9 +14,11 @@ import id.ac.unpas.ewhale.dao.MasyarakatDao;
 import id.ac.unpas.ewhale.jenis_kategori.JenisKat;
 import id.ac.unpas.ewhale.jenis_kategori.JenisKatFrame;
 import id.ac.unpas.ewhale.jenis_kategori.JenisKatModelTable;
+import id.ac.unpas.ewhale.main.UbahJenisKat;
 import id.ac.unpas.ewhale.main.TambahJenisKat;
 import id.ac.unpas.ewhale.main.TambahKurir;
 import id.ac.unpas.ewhale.main.TambahMasyarakat;
+
 import java.util.List;
 /**
  *
@@ -37,6 +39,7 @@ public class JenisKatFrame extends javax.swing.JFrame {
     private JenisKatFrame jenisKatFrame;
     private JenisKatDao jenisKatDao;
     private JenisKatModelTable modelTable;
+    private UbahJenisKat ubahJenisKat;
     
     /**
      * Creates new form JenisKatFrame
@@ -254,7 +257,6 @@ public class JenisKatFrame extends javax.swing.JFrame {
 
         tambahJenisKatButton.setBackground(new java.awt.Color(51, 102, 0));
         tambahJenisKatButton.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        tambahJenisKatButton.setForeground(new java.awt.Color(255, 255, 255));
         tambahJenisKatButton.setText("Tambah Data");
         tambahJenisKatButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -267,7 +269,6 @@ public class JenisKatFrame extends javax.swing.JFrame {
 
         hapusJenisKatButton.setBackground(new java.awt.Color(255, 0, 0));
         hapusJenisKatButton.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        hapusJenisKatButton.setForeground(new java.awt.Color(255, 255, 255));
         hapusJenisKatButton.setText("Hapus Data");
         hapusJenisKatButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -277,7 +278,6 @@ public class JenisKatFrame extends javax.swing.JFrame {
 
         ubahJenisKatButton.setBackground(new java.awt.Color(255, 255, 0));
         ubahJenisKatButton.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        ubahJenisKatButton.setForeground(new java.awt.Color(255, 255, 255));
         ubahJenisKatButton.setText("Edit Data");
         ubahJenisKatButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -425,6 +425,36 @@ public class JenisKatFrame extends javax.swing.JFrame {
     
     private void ubahJenisKatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ubahJenisKatButtonActionPerformed
         // TODO add your handling code here:
+        int row = this.tableJenisKat.getSelectedRow();
+        int column = this.tableJenisKat.getSelectedColumn();
+        
+        if (row == -1 || column == -1) {
+            return;
+        } else {
+            String newValue = (String) this.tableJenisKat.getModel().getValueAt(row, column);
+
+            JenisKat id = new JenisKat();
+
+            String col = "";
+
+            switch (column) {
+                case 0:
+                col = "jenisSampah";
+                break;
+                case 1:
+                col = "kategoriSampah";
+                break;
+                default:
+                System.out.println("Kolom tidak ditemukan");
+                break;
+            }
+            id = this.jenisKatDao.select(col, newValue);
+
+//            this.update(id);
+//            this.jenisKatDao.update(id);
+                ubahJenisKat = new UbahJenisKat();
+                ubahJenisKat.setVisible(true);
+        }
     }//GEN-LAST:event_ubahJenisKatButtonActionPerformed
 
     
