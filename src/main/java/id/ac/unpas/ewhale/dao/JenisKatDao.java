@@ -62,9 +62,10 @@ public class JenisKatDao {
                     "update sampah set jenisSampah = ?, kategoriSampah = ? where idSampah = ?");
 
             // Set nilai dari parameter yang ada di query
-            statement.setString(1, jeniskat.getidSampah()); // id
-            statement.setString(2, jeniskat.getjenisSampah()); // jenis sampah
-            statement.setString(3, jeniskat.getkategoriSampah()); // kategori sampah
+            
+            statement.setString(1, jeniskat.getjenisSampah()); // jenis sampah
+            statement.setString(2, jeniskat.getkategoriSampah()); // kategori sampah
+            statement.setString(3, jeniskat.getidSampah()); // id
 
             // Eksekusi query
             result = statement.executeUpdate();
