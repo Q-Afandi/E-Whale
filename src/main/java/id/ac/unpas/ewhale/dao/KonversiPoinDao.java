@@ -60,20 +60,20 @@ public class KonversiPoinDao {
         try (Connection connection = MySqlConnection.getInstance().getConnection()) {
             // Membuat PreparedStatement untuk mengubah data di database
             PreparedStatement statement = connection.prepareStatement(
-                    "update sampah set jenisSampah = ?, kategoriSampah = ? , poinSampah = ? ,where idSampah = ?");
+                    "update sampah set jenisSampah = ?, kategoriSampah = ?, poinSampah = ? where idSampah = ?");
 
             // Set nilai dari parameter yang ada di query
-            statement.setString(1, konversipoin.getidSampah()); // id
-            statement.setString(2, konversipoin.getjenisSampah()); // jenis sampah
-            statement.setString(3, konversipoin.getkategoriSampah()); // kategori sampah
-            statement.setString(4, konversipoin.getpoinSampah()); // kategori sampah
+            statement.setString(1, konversipoin.getjenisSampah()); // jenis sampah
+            statement.setString(2, konversipoin.getkategoriSampah()); // kategori sampah
+            statement.setString(3, konversipoin.getpoinSampah()); // kategori sampah
+             statement.setString(4, konversipoin.getidSampah()); //id 
 
             // Eksekusi query
             result = statement.executeUpdate();
 
             // Print data yang diubah di database
             System.out.println("Update data: " + konversipoin.getidSampah() + " " + konversipoin.getjenisSampah() + " "
-                    + konversipoin.getkategoriSampah() + " " + konversipoin.getpoinSampah());
+                    + konversipoin.getkategoriSampah() + " " + konversipoin.getpoinSampah()+ " ");
 
         } catch (SQLException e) {
             // Print error jika terjadi error
@@ -167,6 +167,8 @@ public class KonversiPoinDao {
                     konversiPoin.setidSampah(resultSet.getString("idSampah")); // id
                     konversiPoin.setjenisSampah(resultSet.getString("jenisSampah")); // jenis sampah
                     konversiPoin.setkategoriSampah(resultSet.getString("kategoriSampah")); // kategori sampah
+                    konversiPoin.setpoinSampah(resultSet.getString("poinSampah")); // kategori sampah
+
                 }
             } catch (SQLException e) {
                 // Print error jika terjadi error
