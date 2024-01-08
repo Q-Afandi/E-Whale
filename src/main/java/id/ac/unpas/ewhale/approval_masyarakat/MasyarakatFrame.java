@@ -7,6 +7,7 @@ package id.ac.unpas.ewhale.approval_masyarakat;
 import id.ac.unpas.ewhale.dao.MasyarakatDao;
 import id.ac.unpas.ewhale.main.TambahMasyarakat;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -365,7 +366,8 @@ public class MasyarakatFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         int row = this.tableMasyarakat.getSelectedRow();
         int column = this.tableMasyarakat.getSelectedColumn();
-
+        int response = JOptionPane.showConfirmDialog(this, "Apakah anda yakin ingin menerima masyararakat ini?", "Konfirmasi", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+     
         if (row == -1 || column == -1) {
           return;
         } else {
@@ -389,11 +391,22 @@ public class MasyarakatFrame extends javax.swing.JFrame {
                     System.out.println("Kolom tidak ditemukan");
                     break;
             }
-            id = this.masyarakatDao.select(col, newValue);
-
-            this.delete(id);
-            this.masyarakatDao.delete(id);
-        }
+           if(response==JOptionPane.YES_OPTION) {
+            JOptionPane.showMessageDialog(this, "Masyarakat berhasil diterima");
+            
+                id = this.masyarakatDao.select(col, newValue);
+                
+                 this.delete(id);
+                 this.masyarakatDao.delete(id);
+                 
+           }else if(response==JOptionPane.NO_OPTION){
+                   JOptionPane.showMessageDialog(this, "Masyarakat gagal diterima");
+                   
+           }else if(response==JOptionPane.CLOSED_OPTION) {
+                System.out.println("Closed");
+           }
+           
+      }
     }//GEN-LAST:event_terimaMasyarakatActionPerformed
     
     // Method untuk menghapus permintaan ke tableModel
@@ -406,7 +419,8 @@ public class MasyarakatFrame extends javax.swing.JFrame {
     private void tolakMasyarakatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tolakMasyarakatActionPerformed
         // TODO add your handling code here:
          int row = this.tableMasyarakat.getSelectedRow();
-        int column = this.tableMasyarakat.getSelectedColumn();
+         int column = this.tableMasyarakat.getSelectedColumn();
+         int response = JOptionPane.showConfirmDialog(this, "Apakah anda yakin ingin menolak masyararakat ini?", "Konfirmasi", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 
         if (row == -1 || column == -1) {
           return;
@@ -431,10 +445,20 @@ public class MasyarakatFrame extends javax.swing.JFrame {
                     System.out.println("Kolom tidak ditemukan");
                     break;
             }
-            id = this.masyarakatDao.select(col, newValue);
-
-            this.delete(id);
-            this.masyarakatDao.delete(id);
+             if(response==JOptionPane.YES_OPTION) {
+                JOptionPane.showMessageDialog(this, "Masyarakat berhasil ditolak");
+            
+                id = this.masyarakatDao.select(col, newValue);
+                
+                 this.delete(id);
+                 this.masyarakatDao.delete(id);
+                 
+             }else if(response==JOptionPane.NO_OPTION){
+                   JOptionPane.showMessageDialog(this, "Masyarakat gagal ditolak");
+                   
+             }else if(response==JOptionPane.CLOSED_OPTION) {
+                System.out.println("Closed");
+             }
         }
     }//GEN-LAST:event_tolakMasyarakatActionPerformed
 
