@@ -21,6 +21,7 @@ import id.ac.unpas.ewhale.jenis_kategori.JenisKatFrame;
 import id.ac.unpas.ewhale.konversi_poin.KonversiPoin;
 import id.ac.unpas.ewhale.main.TambahJenisKat;
 import id.ac.unpas.ewhale.main.TambahKonversiPoin;
+import id.ac.unpas.ewhale.main.UbahKonversiPoin;
 import id.ac.unpas.ewhale.main.TambahKurir;
 import id.ac.unpas.ewhale.main.TambahMasyarakat;
 import java.util.List;
@@ -44,6 +45,7 @@ public class KonversiPoinFrame extends javax.swing.JFrame {
     private KonversiPoinFrame konversiPoinFrame;
     private KonversiPoinDao konversiPoinDao;
     private KonversiPoinModelTable modelTable;
+    private UbahKonversiPoin ubahKonversiPoin;
     
     /**
      * Creates new form KonversiPoinFrame
@@ -433,6 +435,39 @@ public class KonversiPoinFrame extends javax.swing.JFrame {
     }
     private void ubahKonversiPoinButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ubahKonversiPoinButtonActionPerformed
         // TODO add your handling code here:
+        int row = this.tableKonversiPoin.getSelectedRow();
+        int column = this.tableKonversiPoin.getSelectedColumn();
+        
+        if (row == -1 || column == -1) {
+            return;
+        } else {
+            String newValue = (String) this.tableKonversiPoin.getModel().getValueAt(row, column);
+
+            KonversiPoin id = new KonversiPoin();
+
+            String col = "";
+
+            switch (column) {
+                case 0:
+                col = "jenisSampah";
+                break;
+                case 1:
+                col = "kategoriSampah";
+                break;
+                case 2:
+                col = "poinSampah";
+                break;
+                default:
+                System.out.println("Kolom tidak ditemukan");
+                break;
+            }
+            id = this.konversiPoinDao.select(col, newValue);
+
+//            this.update(id);
+//            this.jenisKatDao.update(id);
+                ubahKonversiPoin = new UbahKonversiPoin(id);
+                ubahKonversiPoin.setVisible(true);
+        }
     }//GEN-LAST:event_ubahKonversiPoinButtonActionPerformed
 
     
