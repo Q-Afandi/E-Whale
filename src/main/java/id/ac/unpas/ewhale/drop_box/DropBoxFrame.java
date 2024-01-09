@@ -30,6 +30,7 @@ import id.ac.unpas.ewhale.drop_box.DropBox;
 import id.ac.unpas.ewhale.drop_box.DropBoxFrame;
 import id.ac.unpas.ewhale.drop_box.DropBoxModelTable;
 import id.ac.unpas.ewhale.main.TambahDropBox;
+import id.ac.unpas.ewhale.main.UbahDropBox;
 import java.util.List;
 
 
@@ -59,6 +60,7 @@ public class DropBoxFrame extends javax.swing.JFrame {
     private List<DropBox> dropBoxList;
     private TambahDropBox tambahDropBox;
     private DropBoxFrame dropBoxFrame;
+    private UbahDropBox ubahDropBox;
     
     
     public DropBoxFrame(DropBoxDao dropBoxDao) {
@@ -110,7 +112,7 @@ public class DropBoxFrame extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tableDropBox = new javax.swing.JTable();
         hapusDropBox = new javax.swing.JButton();
-        ubahDropBox = new javax.swing.JButton();
+        ubahDropBoxButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -295,13 +297,13 @@ public class DropBoxFrame extends javax.swing.JFrame {
             }
         });
 
-        ubahDropBox.setBackground(new java.awt.Color(255, 255, 0));
-        ubahDropBox.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        ubahDropBox.setForeground(new java.awt.Color(255, 255, 255));
-        ubahDropBox.setText("Edit Data");
-        ubahDropBox.addActionListener(new java.awt.event.ActionListener() {
+        ubahDropBoxButton.setBackground(new java.awt.Color(255, 255, 0));
+        ubahDropBoxButton.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        ubahDropBoxButton.setForeground(new java.awt.Color(255, 255, 255));
+        ubahDropBoxButton.setText("Edit Data");
+        ubahDropBoxButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ubahDropBoxActionPerformed(evt);
+                ubahDropBoxButtonActionPerformed(evt);
             }
         });
 
@@ -317,7 +319,7 @@ public class DropBoxFrame extends javax.swing.JFrame {
                         .addGap(14, 14, 14)
                         .addComponent(tambahDropBoxButton)
                         .addGap(18, 18, 18)
-                        .addComponent(ubahDropBox)
+                        .addComponent(ubahDropBoxButton)
                         .addGap(18, 18, 18)
                         .addComponent(hapusDropBox)))
                 .addContainerGap(24, Short.MAX_VALUE))
@@ -329,7 +331,7 @@ public class DropBoxFrame extends javax.swing.JFrame {
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tambahDropBoxButton)
                     .addComponent(hapusDropBox)
-                    .addComponent(ubahDropBox))
+                    .addComponent(ubahDropBoxButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20))
@@ -453,9 +455,47 @@ public void delete(DropBox dropBox) {
                    // Tambahkan permintaan ke tableModel
         modelTable.delete(dropBox);
     }
-    private void ubahDropBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ubahDropBoxActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ubahDropBoxActionPerformed
+    private void ubahDropBoxButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ubahDropBoxButtonActionPerformed
+        int row = this.tableDropBox.getSelectedRow();
+        int column = this.tableDropBox.getSelectedColumn();
+        
+        if (row == -1 || column == -1) {
+            return;
+        } else {
+            String newValue = (String) this.tableDropBox.getModel().getValueAt(row, column);
+
+            DropBox id = new DropBox();
+
+            String col = "";
+
+            switch (column) {
+            case 0:
+                col = "namaMasyarakat";
+                break;
+            case 1:
+                col = "alamatMasyarakat";
+                break;
+            case 2 :
+                col = "jenisSampah";
+                break;
+            case 3 :
+                col = "kategoriSampah";
+                break;
+            case 4 :
+                 col = "poinSampah";
+                break;
+                default:
+                System.out.println("Kolom tidak ditemukan");
+                break;
+            }
+            id = this.dropBoxDao.select(col, newValue);
+
+//            this.update(id);
+//            this.jenisKatDao.update(id);
+                ubahDropBox = new UbahDropBox(id);
+                ubahDropBox.setVisible(true);
+        }
+    }//GEN-LAST:event_ubahDropBoxButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -485,6 +525,6 @@ public void delete(DropBox dropBox) {
     private javax.swing.JButton masyarakatButton;
     private javax.swing.JTable tableDropBox;
     private javax.swing.JButton tambahDropBoxButton;
-    private javax.swing.JButton ubahDropBox;
+    private javax.swing.JButton ubahDropBoxButton;
     // End of variables declaration//GEN-END:variables
 }

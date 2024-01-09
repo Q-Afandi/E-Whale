@@ -5,8 +5,6 @@
 package id.ac.unpas.ewhale.main;
 
 import id.ac.unpas.ewhale.dao.DropBoxDao;
-import id.ac.unpas.ewhale.dao.JenisKatDao;
-import id.ac.unpas.ewhale.dao.KonversiPoinDao;
 import id.ac.unpas.ewhale.drop_box.DropBox;
 import id.ac.unpas.ewhale.drop_box.DropBoxFrame;
 import id.ac.unpas.ewhale.drop_box.DropBoxModelTable;
@@ -18,15 +16,13 @@ import java.util.List;
  */
 public class TambahDropBox extends javax.swing.JFrame {
 
-    /**
-     * Creates new form TambahDropBox
-     */
     private DropBoxModelTable modelTable;
     private DropBoxDao dropBoxDao;
     private DropBoxFrame dropBoxFrame;
     private List<DropBox> dropBoxList;
+    
     public TambahDropBox() {
-         this.dropBoxDao = new DropBoxDao();
+        this.dropBoxDao = new DropBoxDao();
         initComponents();
         this.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     }
@@ -229,14 +225,14 @@ public void addData(DropBox dropBox) {
         String namaMasyarakat = this.namaTextField.getText();
         String alamatMasyarakat = this.alamatTextField.getText();
         String jenisSampah = this.jenisTextField.getText();
-        String KategoriSampah = this.kategoriTextField.getText();
+        String kategoriSampah = this.kategoriTextField.getText();
         String poinSampah = this.poinTextField.getText();
         
         DropBox dropBox = new DropBox();
         dropBox.setnamaMasyarakat(namaMasyarakat);
         dropBox.setalamatMasyarakat(alamatMasyarakat);
         dropBox.setjenisSampah(jenisSampah);
-        dropBox.setkategoriSampah(KategoriSampah);
+        dropBox.setkategoriSampah(kategoriSampah);
         dropBox.setpoinSampah(poinSampah);
         
         this.dropBoxDao.insert(dropBox);
