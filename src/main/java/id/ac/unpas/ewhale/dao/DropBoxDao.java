@@ -5,7 +5,6 @@
 package id.ac.unpas.ewhale.dao;
 
 import id.ac.unpas.ewhale.db.MySqlConnection;
-import id.ac.unpas.ewhale.jenis_kategori.JenisKat;
 import id.ac.unpas.ewhale.drop_box.DropBox;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -28,21 +27,22 @@ public class DropBoxDao {
         try (Connection connection = MySqlConnection.getInstance().getConnection()) {
             // Membuat PreparedStatement untuk memasukkan data ke database
             PreparedStatement statement = connection.prepareStatement(
-                    "Insert into sampah(idSampah, jenisSampah, kategoriSampah, poinSampah, idMasyarakat ) values (?, ?, ?, ?, ?)");
+                    "Insert into dropbox(idDropbox, namaMasyarakat, alamatMasyarakat, jenisSampah, kategoriSampah, poinSampah) values (?, ?, ?, ?, ?, ?)");
 
             // Set nilai dari parameter yang ada di query
-            statement.setString(1, dropbox.getidSampah()); // id
-            statement.setString(2, dropbox.getjenisSampah()); // jenis sampah
-            statement.setString(3, dropbox.getkategoriSampah()); // kategori sampah
-            statement.setString(4, dropbox.getpoinSampah());
-            statement.setString(5, dropbox.getidMasyarakat());
+            statement.setString(1, dropbox.getidDropBox());
+            statement.setString(2, dropbox.getnamaMasyarakat()); // id
+            statement.setString(3, dropbox.getalamatMasyarakat()); // jenis sampah
+            statement.setString(4, dropbox.getjenisSampah()); // kategori sampah
+            statement.setString(5, dropbox.getkategoriSampah());
+            statement.setString(6, dropbox.getpoinSampah());
             
             // Eksekusi query
             result = statement.executeUpdate();
 
             // Print data yang dimasukkan ke database
-            System.out.println("Insert data: " + dropbox.getidSampah() + " " + dropbox.getjenisSampah() + " "
-                    + dropbox.getkategoriSampah() + " " + dropbox.getpoinSampah() + " " + dropbox.getidMasyarakat() + " ");
+            System.out.println("Insert data: " + dropbox.getidDropBox() + " " + dropbox.getnamaMasyarakat() + " " + dropbox.getalamatMasyarakat() + " "
+                    + dropbox.getjenisSampah() + " " + dropbox.getkategoriSampah() + " " + dropbox.getpoinSampah() + " ");
         } catch (SQLException e) {
             // Print error jika terjadi error
             e.printStackTrace();
@@ -61,21 +61,23 @@ public class DropBoxDao {
         try (Connection connection = MySqlConnection.getInstance().getConnection()) {
             // Membuat PreparedStatement untuk mengubah data di database
             PreparedStatement statement = connection.prepareStatement(
-                    "update sampah set jenisSampah = ?, kategoriSampah = ? where idSampah = ?, ");
+                    "update dropbox set namaMasyarakat = ?, alamatMasyarakat = ?, jenisSampah = ?, kategoriSampah = ?, poinSampah = ? where idDropBox = ?");
 
             // Set nilai dari parameter yang ada di query
-            statement.setString(1, dropbox.getidSampah()); // id
-            statement.setString(2, dropbox.getjenisSampah()); // jenis sampah
-            statement.setString(3, dropbox.getkategoriSampah()); // kategori sampah
-            statement.setString(4, dropbox.getpoinSampah());
-            statement.setString(5, dropbox.getidMasyarakat());
+            
+            statement.setString(1, dropbox.getnamaMasyarakat()); // id
+            statement.setString(2, dropbox.getalamatMasyarakat()); // jenis sampah
+            statement.setString(3, dropbox.getjenisSampah()); // kategori sampah
+            statement.setString(4, dropbox.getkategoriSampah());
+            statement.setString(5, dropbox.getpoinSampah());
+            statement.setString(6, dropbox.getidDropBox());
 
             // Eksekusi query
             result = statement.executeUpdate();
 
             // Print data yang diubah di database
-            System.out.println("Update data: " + dropbox.getidSampah() + " " + dropbox.getjenisSampah() + " "
-                    + dropbox.getkategoriSampah() + " " + dropbox.getpoinSampah() + " " + dropbox.getidMasyarakat() + " ");
+            System.out.println("Update data: " + dropbox.getidDropBox() + " " + dropbox.getnamaMasyarakat() + " " + dropbox.getalamatMasyarakat() + " "
+                    + dropbox.getjenisSampah() + " " + dropbox.getkategoriSampah() + " " + dropbox.getpoinSampah() + " ");
 
         } catch (SQLException e) {
             // Print error jika terjadi error
@@ -94,17 +96,17 @@ public class DropBoxDao {
         // Try with resources untuk membuat koneksi ke database
         try (Connection connection = MySqlConnection.getInstance().getConnection()) {
             // Membuat PreparedStatement untuk menghapus data di database
-            PreparedStatement statement = connection.prepareStatement("delete from sampah where idSampah = ?");
+            PreparedStatement statement = connection.prepareStatement("delete from dropbox where idDropBox = ?");
 
             // Set nilai dari parameter yang ada di query
-            statement.setString(1, dropbox.getidSampah()); // id
-
+            statement.setString(1, this.select("namaMasyarakat", dropbox.getnamaMasyarakat()).getidDropBox()); 
+           
             // Eksekusi query
             result = statement.executeUpdate();
 
             // Print data yang dihapus di database
-            System.out.println("Delete data: " + dropbox.getidSampah() + " " + dropbox.getjenisSampah() + " "
-                    + dropbox.getkategoriSampah() + " "  + dropbox.getpoinSampah() + " " + dropbox.getidMasyarakat() + " ");
+            System.out.println("Delete data: " + dropbox.getidDropBox() + " " + dropbox.getnamaMasyarakat() + " " + dropbox.getalamatMasyarakat() + " "
+                    + dropbox.getjenisSampah() + " "  + dropbox.getkategoriSampah() + " " + dropbox.getpoinSampah() + " ");
         } catch (SQLException e) {
             // Print error jika terjadi error
             e.printStackTrace();
@@ -127,18 +129,19 @@ public class DropBoxDao {
                 Statement statement = connection.createStatement();) {
 
             // Membuat ResultSet untuk menyimpan hasil dari eksekusi query
-            try (ResultSet resultSet = statement.executeQuery("select * from sampah")) {
+            try (ResultSet resultSet = statement.executeQuery("select * from dropbox")) {
                 // Looping untuk mengambil semua data dari database
                 while (resultSet.next()) {
                     // Membuat object sampah untuk menyimpan data
                     DropBox dropBox = new DropBox();
 
                     // Set nilai dari object sampah
+                    dropBox.setidDropBox(resultSet.getString("idDropBox")); 
                     dropBox.setnamaMasyarakat(resultSet.getString("namaMasyarakat")); // id
-                    dropBox.setjenisSampah(resultSet.getString("jenisSampah")); // Jenis Sampah
+                    dropBox.setalamatMasyarakat(resultSet.getString("alamatMasyarakat")); // Jenis Sampah
+                    dropBox.setjenisSampah(resultSet.getString("jenisSampah"));
                     dropBox.setkategoriSampah(resultSet.getString("kategoriSampah"));
-                    dropBox.setpoinSampah(resultSet.getString("poinSampah"));
-                    dropBox.setidMasyarakat(resultSet.getString("idMasyarakat"));// Kategori Sampah
+                    dropBox.setpoinSampah(resultSet.getString("poinSampah"));// Kategori Sampah
 
                     // Menambahkan sampah ke list
                     list.add(dropBox);
@@ -159,7 +162,7 @@ public class DropBoxDao {
     // Fungsi untuk mendapatkan data dari database berdasarkan column dan value
     public DropBox select(String column, String value) {
         // Membuat object kurir untuk menyimpan data
-        DropBox dropbox = new DropBox();
+        DropBox dropBox = new DropBox();
 
         // Try with resources untuk membuat koneksi ke database
         try (
@@ -169,15 +172,16 @@ public class DropBoxDao {
                 Statement statement = connection.createStatement();
             ) {
             // Membuat ResultSet untuk menyimpan hasil dari eksekusi query
-            try (ResultSet resultSet = statement.executeQuery("select * from sampah where " + column+ " = '" + value + "'");) {
+            try (ResultSet resultSet = statement.executeQuery("select * from dropbox where " + column+ " = '" + value + "'");) {
                 // Looping untuk mengambil semua data dari database
                 while (resultSet.next()) {
                     // Set nilai dari object kurir
-                    dropbox.setidSampah(resultSet.getString("idSampah")); // id
-                    dropbox.setjenisSampah(resultSet.getString("jenisSampah")); // jenis sampah
-                    dropbox.setkategoriSampah(resultSet.getString("kategoriSampah")); // kategori sampah
-                    dropbox.setpoinSampah(resultSet.getString("poinSampah"));
-                    dropbox.setidMasyarakat(resultSet.getString("idMasyarakat"));
+                    dropBox.setidDropBox(resultSet.getString("idDropBox"));
+                    dropBox.setnamaMasyarakat(resultSet.getString("namaMasyarakat")); // id
+                    dropBox.setalamatMasyarakat(resultSet.getString("alamatMasyarakat")); // Jenis Sampah
+                    dropBox.setjenisSampah(resultSet.getString("jenisSampah"));
+                    dropBox.setkategoriSampah(resultSet.getString("kategoriSampah"));
+                    dropBox.setpoinSampah(resultSet.getString("poinSampah"));
                 }
             } catch (SQLException e) {
                 // Print error jika terjadi error
@@ -189,6 +193,6 @@ public class DropBoxDao {
         }
 
         // Kembalikan nilai sampah
-        return dropbox;
+        return dropBox;
     }
 }

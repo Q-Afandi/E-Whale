@@ -9,24 +9,22 @@ package id.ac.unpas.ewhale.drop_box;
  * @author ACER
  */
 public class DropBox {
-    private String idSampah; // Variable id untuk menyimpan nilai id
+    private String idDropBox; // Variable id untuk menyimpan nilai id
     private String jenisSampah; // Variable nama untuk menyimpan nilai nama
     private String kategoriSampah; // Variable noTelepon untuk menyimpan nilai noTelepon
     private String poinSampah;
-    private String idMasyarakat;
-    // Set nilai dari id dengan parameter id
     private String namaMasyarakat;
     private String alamatMasyarakat;
     
-    public void setidSampah(String id) {
+    public void setidDropBox(String id) {
         // Set this.id dengan parameter id
-        this.idSampah = id;
+        this.idDropBox = id;
     }
     
     // Dapatkan nilai dari id
-    public String getidSampah() {
+    public String getidDropBox() {
         // Kembalikan nilai dari this.id
-        return this.idSampah;
+        return this.idDropBox;
     } 
     
     // Set nilai dari nama dengan parameter nama
@@ -62,17 +60,6 @@ public class DropBox {
         return this.poinSampah;
     }
     
-    public void setidMasyarakat(String id) {
-        // Set this.id dengan parameter id
-        this.idMasyarakat = id;
-    }
-    
-    // Dapatkan nilai dari id
-    public String getidMasyarakat() {
-        // Kembalikan nilai dari this.id
-        return this.idMasyarakat;
-    } 
-
     public void setnamaMasyarakat(String nama) {
         this.namaMasyarakat = nama;
     }
@@ -81,11 +68,13 @@ public class DropBox {
         return this.namaMasyarakat;
     }
     public void setalamatMasyarakat(String alamat) {
-        this.namaMasyarakat = alamat;
+        this.alamatMasyarakat = alamat;
     }
     
     public String getalamatMasyarakat() {
         return this.alamatMasyarakat;
     }
+
+   
 }
 

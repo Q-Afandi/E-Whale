@@ -101,7 +101,7 @@ public class DropBoxModelTable extends AbstractTableModel{
         // Looping untuk mencari index dari data yang ingin diubah
         for (DropBox b : data) {
             // Jika id dari data sama dengan id dari value
-            if (b.getidSampah().equals(value.getidSampah())) {
+            if (b.getidDropBox().equals(value.getidDropBox())) {
                 // Biodata tersebut menjadi value
                 b = value;
                 // Set List data ke-i dengan value
@@ -123,7 +123,7 @@ public class DropBoxModelTable extends AbstractTableModel{
         // Looping untuk mencari index dari data yang ingin dihapus
         for (DropBox b : data) {
             // Jika id dari data sama dengan id dari value
-            if (b.getidSampah().equals(value.getidSampah())) {
+            if (b.getidDropBox().equals(value.getidDropBox())) {
                 // Hapus data dari List data
                 data.remove(i);
                 // Hentikan looping

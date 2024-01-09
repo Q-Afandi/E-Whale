@@ -346,7 +346,7 @@
                                   <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                                   <Component id="tambahDropBoxButton" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="ubahDropBox" min="-2" max="-2" attributes="0"/>
+                                  <Component id="ubahDropBoxButton" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="hapusDropBox" min="-2" max="-2" attributes="0"/>
                               </Group>
@@ -362,7 +362,7 @@
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="tambahDropBoxButton" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="hapusDropBox" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="ubahDropBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="ubahDropBoxButton" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="jScrollPane1" min="-2" pref="390" max="-2" attributes="0"/>
@@ -428,7 +428,7 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="hapusDropBoxActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="ubahDropBox">
+                <Component class="javax.swing.JButton" name="ubahDropBoxButton">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="0" green="ff" red="ff" type="rgb"/>
@@ -442,7 +442,7 @@
                     <Property name="text" type="java.lang.String" value="Edit Data"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ubahDropBoxActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ubahDropBoxButtonActionPerformed"/>
                   </Events>
                 </Component>
               </SubComponents>
