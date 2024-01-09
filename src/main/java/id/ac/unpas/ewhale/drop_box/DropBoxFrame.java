@@ -17,6 +17,7 @@ import id.ac.unpas.ewhale.dao.KonversiPoinDao;
 import id.ac.unpas.ewhale.dao.KurirDao;
 import id.ac.unpas.ewhale.dao.MasyarakatDao;
 import id.ac.unpas.ewhale.dao.DropBoxDao;
+import id.ac.unpas.ewhale.db.MySqlConnection;
 import id.ac.unpas.ewhale.jenis_kategori.JenisKat;
 import id.ac.unpas.ewhale.jenis_kategori.JenisKatFrame;
 import id.ac.unpas.ewhale.konversi_poin.KonversiPoin;
@@ -32,6 +33,18 @@ import id.ac.unpas.ewhale.drop_box.DropBoxModelTable;
 import id.ac.unpas.ewhale.main.TambahDropBox;
 import id.ac.unpas.ewhale.main.UbahDropBox;
 import java.util.List;
+import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
+import javax.swing.JOptionPane;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperPrintManager;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 
 
 
@@ -113,6 +126,9 @@ public class DropBoxFrame extends javax.swing.JFrame {
         tableDropBox = new javax.swing.JTable();
         hapusDropBox = new javax.swing.JButton();
         ubahDropBoxButton = new javax.swing.JButton();
+        printButton = new javax.swing.JButton();
+        previewButton = new javax.swing.JButton();
+        ExportButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -307,6 +323,27 @@ public class DropBoxFrame extends javax.swing.JFrame {
             }
         });
 
+        printButton.setText("Print Data");
+        printButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                printButtonActionPerformed(evt);
+            }
+        });
+
+        previewButton.setText("Preview");
+        previewButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                previewButtonActionPerformed(evt);
+            }
+        });
+
+        ExportButton.setText("Export to PDF");
+        ExportButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ExportButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
@@ -321,7 +358,13 @@ public class DropBoxFrame extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(ubahDropBoxButton)
                         .addGap(18, 18, 18)
-                        .addComponent(hapusDropBox)))
+                        .addComponent(hapusDropBox)
+                        .addGap(18, 18, 18)
+                        .addComponent(printButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(previewButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(ExportButton)))
                 .addContainerGap(24, Short.MAX_VALUE))
         );
         jPanel9Layout.setVerticalGroup(
@@ -331,7 +374,10 @@ public class DropBoxFrame extends javax.swing.JFrame {
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tambahDropBoxButton)
                     .addComponent(hapusDropBox)
-                    .addComponent(ubahDropBoxButton))
+                    .addComponent(ubahDropBoxButton)
+                    .addComponent(printButton)
+                    .addComponent(previewButton)
+                    .addComponent(ExportButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20))
@@ -497,11 +543,95 @@ public void delete(DropBox dropBox) {
         }
     }//GEN-LAST:event_ubahDropBoxButtonActionPerformed
 
+    private void printButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printButtonActionPerformed
+       try {
+            // Mendapatkan path direktori laporan
+            String reportPath = System.getProperty("user.dir") + File.separator + "report";
+            
+             // Mendapatkan path lengkap untuk file laporan (MemberReport.jrxml)
+            String path = System.getProperty("user.dir") + File.separator + "report" + File.separator + "DropBoxReport.jrxml";
+            
+            // Mengompilasi file laporan menjadi objek JasperReport
+            JasperReport jasperReport = JasperCompileManager.compileReport(path);
+                
+             // Membuat objek parameter untuk laporan
+            Map<String, Object> parameters = new HashMap<>();
+            
+            // Mengisi laporan menggunakan data dari koneksi database
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, MySqlConnection.getInstance().getConnection());
+            
+            // Mencetak laporan ke printer
+            JasperPrintManager.printReport(jasperPrint, true);
+
+        } catch (JRException e) {
+            // Menangani exception dengan mencetak stack trace
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_printButtonActionPerformed
+
+    private void previewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_previewButtonActionPerformed
+       try {
+            // Mendapatkan path direktori laporan
+            String reportPath = System.getProperty("user.dir") + File.separator + "report";
+            
+            // Mendapatkan path lengkap untuk file laporan (MemberReport.jrxml)
+            String path = System.getProperty("user.dir") + File.separator + "report" + File.separator + "DropBoxReport.jrxml";
+            
+            // Mengompilasi file laporan menjadi objek JasperReport
+            JasperReport jasperReport = JasperCompileManager.compileReport(path);
+            
+            // Membuat objek parameter untuk laporan
+            Map<String, Object> parameters = new HashMap<>();
+            
+            // Mengisi laporan menggunakan data dari koneksi database
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, MySqlConnection.getInstance().getConnection());
+            
+            // Menampilkan laporan dalam jendela pratinjau
+            JasperViewer.viewReport(jasperPrint);
+        } catch (JRException e) {
+            // Menangani exception dengan mencetak stack trace
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_previewButtonActionPerformed
+
+    private void ExportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExportButtonActionPerformed
+         try {
+              // Mendapatkan path direktori laporan
+            String reportPath = System.getProperty("user.dir") + File.separator + "report";
+            
+            // Mendapatkan path lengkap untuk file laporan (MemberReport.jrxml)
+            String path = System.getProperty("user.dir") + File.separator + "report" + File.separator + "DropBoxReport.jrxml";
+            
+             // Mengompilasi file laporan menjadi objek JasperReport
+            JasperReport jasperReport = JasperCompileManager.compileReport(path);
+                
+            // Membuat objek parameter untuk laporan
+            Map<String, Object> parameters = new HashMap<>();
+            
+             // Mengisi laporan menggunakan data dari koneksi database
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, MySqlConnection.getInstance().getConnection());
+            
+            // Membuat direktori jika belum ada
+            File outDir = new File(reportPath);
+            outDir.mkdirs();
+            // Mengekspor laporan ke file PDF
+            JasperExportManager.exportReportToPdfFile(jasperPrint, reportPath + File.separator + "DropBoxReport.pdf");
+            // Menampilkan pesan dialog bahwa proses ekspor selesai
+            JOptionPane.showMessageDialog(this, "Export selesai");
+            
+        } catch (JRException e) {
+            // Menangani exception dengan mencetak stack trace
+            e.printStackTrace();
+        }
+       
+    }//GEN-LAST:event_ExportButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ExportButton;
     private javax.swing.JLabel approvalregistrasi;
     private javax.swing.JLabel datamaster;
     private javax.swing.JButton dropboxButton;
@@ -523,6 +653,8 @@ public void delete(DropBox dropBox) {
     private javax.swing.JButton konversiButton;
     private javax.swing.JButton kurirButton;
     private javax.swing.JButton masyarakatButton;
+    private javax.swing.JButton previewButton;
+    private javax.swing.JButton printButton;
     private javax.swing.JTable tableDropBox;
     private javax.swing.JButton tambahDropBoxButton;
     private javax.swing.JButton ubahDropBoxButton;
